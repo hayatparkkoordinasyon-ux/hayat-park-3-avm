@@ -857,7 +857,7 @@ function indexPage(locale) {
   const skipPos = rtl ? "end-0" : "start-0";
   const quickCardsHtml = cards
     .map(
-      (c) => `            <div class="col-6 col-md-4 col-lg">
+      (c) => `            <div class="col-12 col-sm-6 col-md-4 col-lg">
               <article class="card hp3-card hp3-quick-card border-0 h-100">
                 <div class="card-body d-flex flex-column">
                   <h2 class="h6 text-white mb-2">${c.title}</h2>
@@ -891,7 +891,7 @@ ${nav(locale, "home")}
           <div class="hp3-hero-inner hp3-hero-inner-statement py-lg-2">
             <h1 class="hp3-hero-statement mb-0">${purpose.p1}</h1>
           </div>
-          <div class="row g-3 mt-4">
+          <div class="row g-3 mt-4 hp3-quick-grid">
 ${quickCardsHtml}
           </div>
         </div>
