@@ -5,7 +5,16 @@
 (function ($) {
   "use strict";
 
-  var PHOTO_CAT_ORDER = ["construction", "meetings", "documents", "drone"];
+  var PLACEHOLDER_CAT_ORDER = ["construction", "meetings", "documents", "drone"];
+  var PHOTO_FILTER_ORDER = PLACEHOLDER_CAT_ORDER.concat(["dis-gorunus"]);
+
+  var DIS_GORUNUS_IMAGES = [
+    "../images/dis-gorunus-1.jpeg",
+    "../images/dis-gorunus-2.jpeg",
+    "../images/dis-gorunus-3.jpeg",
+    "../images/dis-gorunus-4.jpeg",
+    "../images/dis-gorunus-5.jpeg",
+  ];
 
   var YT_IDS = [
     "btMdybxPsLc",
@@ -29,6 +38,7 @@
         meetings: "Meeting Photos",
         documents: "Official Documents",
         drone: "Drone Images",
+        "dis-gorunus": "Outside View",
         videos: "Videos",
       },
       imageTitle: function (i, cat) {
@@ -50,6 +60,10 @@
             "Aerial progress capture for transparent monitoring of the development envelope (flight log HP3-UAV-" +
             String(i).padStart(4, "0") +
             ").",
+          "dis-gorunus":
+            "Exterior view of the Hayat Park 3 development site for owner reference (HP3-EXT-" +
+            String(i).padStart(4, "0") +
+            ").",
         };
         return map[cat] || map.construction;
       },
@@ -69,6 +83,7 @@
         meetings: "Toplantı Görselleri",
         documents: "Resmi Belgeler",
         drone: "Drone Görselleri",
+        "dis-gorunus": "Dış Görünüm",
         videos: "Videolar",
       },
       imageTitle: function (i, cat) {
@@ -90,6 +105,10 @@
             "Gelişim zarfi için şeffaf izleme amaçlı havadan görüntü (uçuş kaydı: HP3-UAV-" +
             String(i).padStart(4, "0") +
             ").",
+          "dis-gorunus":
+            "Hayat Park 3 proje sahasının dış görünümü — malikler için referans görsel (HP3-DIS-" +
+            String(i).padStart(4, "0") +
+            ").",
         };
         return map[cat] || map.construction;
       },
@@ -109,6 +128,7 @@
         meetings: "صور الاجتماعات",
         documents: "وثائق رسمية",
         drone: "صور بطائرة مسيّرة",
+        "dis-gorunus": "المنظر الخارجي",
         videos: "مقاطع فيديو",
       },
       imageTitle: function (i, cat) {
@@ -130,6 +150,10 @@
             "التقاط جوي لمتابعة تقدم الغلاف المعماري بشكل واضح. سجل الطيران: HP3-UAV-" +
             String(i).padStart(4, "0") +
             ".",
+          "dis-gorunus":
+            "منظر خارجي لموقع مشروع حياة بارك 3 كمرجع للمالكين (HP3-EXT-" +
+            String(i).padStart(4, "0") +
+            ").",
         };
         return map[cat] || map.construction;
       },
@@ -149,6 +173,7 @@
         meetings: "تصاویر جلسات",
         documents: "اسناد رسمی",
         drone: "تصاویر پهپادی",
+        "dis-gorunus": "نمای بیرونی",
         videos: "ویدئوها",
       },
       imageTitle: function (i, cat) {
@@ -170,6 +195,10 @@
             "ثبت تصویر هوایی برای پیگیری شفاف پیرامون پیشرفت حجم ساختمان. گزارش پرواز: HP3-UAV-" +
             String(i).padStart(4, "0") +
             ".",
+          "dis-gorunus":
+            "نمای بیرونی محوطهٔ پروژهٔ حیات پارک ۳ برای مرجع مالکان (HP3-EXT-" +
+            String(i).padStart(4, "0") +
+            ").",
         };
         return map[cat] || map.construction;
       },
@@ -200,7 +229,7 @@
   }
 
   function catForImageIndex(idx) {
-    return PHOTO_CAT_ORDER[idx % PHOTO_CAT_ORDER.length];
+    return PLACEHOLDER_CAT_ORDER[idx % PLACEHOLDER_CAT_ORDER.length];
   }
 
   function escapeAttr(s) {
@@ -274,7 +303,7 @@
       $("[data-hp3-filter-all]").each(function () {
         $(this).find("span").text(L.filters.all);
       });
-      PHOTO_CAT_ORDER.forEach(function (cat) {
+      PHOTO_FILTER_ORDER.forEach(function (cat) {
         $(".hp3-filter-btn[data-filter='" + cat + "']").text(L.filters[cat]);
       });
     }
@@ -285,18 +314,10 @@
       return String(s).replace(/;/g, " — ");
     }
 
-    function imageBlock(i, catKey) {
-      var seed =
-        "hp3-" +
-        catKey +
-        "-" +
-        String(i).padStart(3, "0") +
-        "-hayatpark3";
-      var thumbUrl = "https://picsum.photos/seed/" + encodeURIComponent(seed) + "/560/420";
-      var fullUrl = "https://picsum.photos/seed/" + encodeURIComponent(seed) + "/1680/1050";
-
+    function galleryFigure(i, catKey, thumbUrl, fullUrl) {
       var title = L.imageTitle.call(L, i, catKey);
       var caption = L.imageCaption.call(L, i, catKey);
+      var lightboxUrl = fullUrl || thumbUrl;
 
       var dataBox =
         "title: " + sanitizeGlightboxText(title) + "; description: " + sanitizeGlightboxText(caption);
@@ -307,7 +328,7 @@
         '">' +
         '<div class="gallery-thumb-wrapper">' +
         '<a href="' +
-        escapeAttr(fullUrl) +
+        escapeAttr(lightboxUrl) +
         '" class="glightbox hp3-gallery-visible" data-glightbox="' +
         escapeAttr(dataBox) +
         '">' +
@@ -324,6 +345,23 @@
         "</figcaption>" +
         "</figure>"
       );
+    }
+
+    function imageBlock(i, catKey) {
+      var seed =
+        "hp3-" +
+        catKey +
+        "-" +
+        String(i).padStart(3, "0") +
+        "-hayatpark3";
+      var thumbUrl = "https://picsum.photos/seed/" + encodeURIComponent(seed) + "/560/420";
+      var fullUrl = "https://picsum.photos/seed/" + encodeURIComponent(seed) + "/1680/1050";
+
+      return galleryFigure(i, catKey, thumbUrl, fullUrl);
+    }
+
+    function realImageBlock(i, catKey, imagePath) {
+      return galleryFigure(i, catKey, imagePath, imagePath);
     }
 
     function videoBlock(vidx, catKeyAlwaysVideos) {
@@ -361,9 +399,19 @@
     }
 
     if (mode === "photos") {
+      var usedImagePaths = {};
+
       for (var idx = 1; idx <= 103; idx += 1) {
         html += imageBlock(idx, catForImageIndex(idx - 1));
       }
+
+      DIS_GORUNUS_IMAGES.forEach(function (imagePath, imageIdx) {
+        if (usedImagePaths[imagePath]) {
+          return;
+        }
+        usedImagePaths[imagePath] = true;
+        html += realImageBlock(imageIdx + 1, "dis-gorunus", imagePath);
+      });
     } else {
       var v;
       for (v = 1; v <= 12; v += 1) {

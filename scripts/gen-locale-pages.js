@@ -62,6 +62,13 @@ ${x.footerLinks}
         </div>`;
 }
 
+const HERO_ALT = {
+  en: "Exterior view of the Hayat Park 3 shopping mall development site",
+  tr: "Hayat Park 3 alışveriş merkezi proje sahasının dış görünümü",
+  ar: "منظر خارجي لموقع مشروع مركز حياة بارك 3 التجاري",
+  fa: "نمای بیرونی محوطه پروژه مرکز خرید حیات پارک ۳",
+};
+
 const QUICK_CARDS = {
   en: [
     { href: "announcements.html", title: "Announcements", desc: "Official notices and short summaries.", btn: "Open", primary: false },
@@ -312,38 +319,42 @@ const GL_JS =
   '    <script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js" defer></script>\n    <script src="../assets/js/gallery.js" defer></script>';
 
 const photoFilLabels = {
-  en: ["All", "Construction Progress", "Meeting Photos", "Official Documents", "Drone Imagery"],
-  tr: ["Tümü", "İnşaat İlerlemesi", "Toplantı Görselleri", "Resmi Belgeler", "Drone Görselleri"],
-  ar: ["الكل", "تقدم الإنشاءات", "صور الاجتماعات", "وثائق رسمية", "صور بطائرة مسيّرة"],
-  fa: ["همه", "پیشرفت ساخت", "تصاویر جلسات", "اسناد رسمی", "تصاویر پهپادی"],
+  en: ["All", "Construction Progress", "Meeting Photos", "Official Documents", "Drone Imagery", "Outside View"],
+  tr: ["Tümü", "İnşaat İlerlemesi", "Toplantı Görselleri", "Resmi Belgeler", "Drone Görselleri", "Dış Görünüm"],
+  ar: ["الكل", "تقدم الإنشاءات", "صور الاجتماعات", "وثائق رسمية", "صور بطائرة مسيّرة", "المنظر الخارجي"],
+  fa: ["همه", "پیشرفت ساخت", "تصاویر جلسات", "اسناد رسمی", "تصاویر پهپادی", "نمای بیرونی"],
 };
 
 function photosPage(locale) {
   const rtl = locale === "ar" || locale === "fa";
   const x = L[locale];
   const titles = {
+    en: "Photos — Hayat Park 3 AVM",
     tr: "Fotoğraflar — Hayat Park 3 AVM",
     ar: "الصور — Hayat Park 3",
     fa: "تصاویر — حیات پارک ۳",
   };
   const descs = {
+    en: "Hayat Park 3 project photo archive — GLightbox",
     tr: "Hayat Park 3 proje fotoğraf arşivi — GLightbox",
     ar: "أرشيف صور مشروع حياة بارك 3",
     fa: "آرشیو تصاویر پروژهٔ حیات پارک ۳",
   };
   const h1s = {
+    en: "Project photos",
     tr: "Proje fotoğrafları",
     ar: "صور المشروع",
     fa: "تصاویر پروژه",
   };
   const lead = {
+    en: 'Tap a thumbnail to open the full image. Update media URLs in <code>assets/js/gallery.js</code>.',
     tr: 'Küçük resme dokunun; tam görüntü açılır. Adresleri <code>assets/js/gallery.js</code> içinden güncelleyin.',
     ar: "اضغط المصغّرة للعرض الكامل. مرّر للتنقّل على الهاتف.",
     fa: "برای مشاهدهٔ کامل روی بندانگشتی بزنید. آدرس رسانه‌ها را در gallery.js قرار دهید.",
   };
-  const cnt = { tr: "Öğe sayısı", ar: "عدد العناصر", fa: "تعداد موارد" };
-  const bcAria = { tr: "Sayfa konumu", ar: "مسار التصفح", fa: "مسیر صفحه" };
-  const [f0, f1, f2, f3, f4] = photoFilLabels[locale];
+  const cnt = { en: "Item count", tr: "Öğe sayısı", ar: "عدد العناصر", fa: "تعداد موارد" };
+  const bcAria = { en: "Breadcrumb", tr: "Sayfa konumu", ar: "مسار التصفح", fa: "مسیر صفحه" };
+  const [f0, f1, f2, f3, f4, f5] = photoFilLabels[locale];
   const bs = rtl ? "bootstrap.rtl.min.css" : "bootstrap.min.css";
   return `<!DOCTYPE html>
 <html lang="${locale}" dir="${rtl ? "rtl" : "ltr"}">
@@ -369,6 +380,7 @@ ${nav(locale, "photos")}
           <button type="button" class="btn btn-outline-secondary hp3-filter-btn" data-filter="meetings">${f2}</button>
           <button type="button" class="btn btn-outline-secondary hp3-filter-btn" data-filter="documents">${f3}</button>
           <button type="button" class="btn btn-outline-secondary hp3-filter-btn" data-filter="drone">${f4}</button>
+          <button type="button" class="btn btn-outline-secondary hp3-filter-btn" data-filter="dis-gorunus">${f5}</button>
         </div>
         <div id="hp3-gallery-root" class="row g-4" aria-live="polite"></div>
       </div>
@@ -382,27 +394,31 @@ function videosPage(locale) {
   const rtl = locale === "ar" || locale === "fa";
   const x = L[locale];
   const titles = {
+    en: "Videos — Hayat Park 3 AVM",
     tr: "Videolar — Hayat Park 3 AVM",
     ar: "مقاطع فيديو — Hayat Park 3",
     fa: "ویدئوها — حیات پارک ۳",
   };
   const descs = {
+    en: "Hayat Park 3 project video archive — GLightbox",
     tr: "Hayat Park 3 proje video arşivi — GLightbox",
     ar: "أرشيف مقاطع فيديو مشروع حياة بارك 3",
     fa: "آرشیو ویدئوهای پروژهٔ حیات پارک ۳",
   };
   const h1s = {
+    en: "Project videos",
     tr: "Proje videoları",
     ar: "مقاطع فيديو المشروع",
     fa: "ویدئوهای پروژه",
   };
   const lead = {
+    en: 'Tap a thumbnail to play the video. Update YouTube links in <code>assets/js/gallery.js</code>.',
     tr: "Küçük resme dokunun; video oynatıcı açılır. YouTube bağlantılarını <code>assets/js/gallery.js</code> içinden güncelleyin.",
     ar: "اضغط المصغّرة لتشغيل الفيديو. استبدل روابط يوتيوب في gallery.js.",
     fa: "برای پخش روی بندانگشتی بزنید. لینک‌های یوتوب را در gallery.js به‌روز کنید.",
   };
-  const cnt = { tr: "Öğe sayısı", ar: "عدد العناصر", fa: "تعداد موارد" };
-  const bcAria = { tr: "Sayfa konumu", ar: "مسار التصفح", fa: "مسیر صفحه" };
+  const cnt = { en: "Item count", tr: "Öğe sayısı", ar: "عدد العناصر", fa: "تعداد موارد" };
+  const bcAria = { en: "Breadcrumb", tr: "Sayfa konumu", ar: "مسار التصفح", fa: "مسیر صفحه" };
   const bs = rtl ? "bootstrap.rtl.min.css" : "bootstrap.min.css";
   return `<!DOCTYPE html>
 <html lang="${locale}" dir="${rtl ? "rtl" : "ltr"}">
@@ -434,21 +450,25 @@ function contactPage(locale) {
   const rtl = locale === "ar" || locale === "fa";
   const x = L[locale];
   const t = {
+    en: "Contact — Hayat Park 3 AVM",
     tr: "İletişim — Hayat Park 3 AVM",
     ar: "اتصل بنا — Hayat Park 3",
     fa: "تماس — حیات پارک ۳",
   };
   const d = {
+    en: "Hayat Park 3 owner contact form (embedded Google Form)",
     tr: "Hayat Park 3 malik iletişim formu (Google Form gömülü)",
     ar: "نموذج تواصل الملاك عبر Google Forms",
     fa: "فرم تماس مالکان با Google Forms",
   };
-  const h1 = { tr: "İletişim", ar: "اتصل بنا", fa: "تماس" };
+  const h1 = { en: "Contact", tr: "İletişim", ar: "اتصل بنا", fa: "تماس" };
   const sub = {
+    en: "Send your questions and requests using the form below.",
     tr: "Sorularınızı ve taleplerinizi aşağıdaki formdan iletebilirsiniz.",
     ar: "أرسل أسئلتك وطلباتك عبر النموذج أدناه.",
     fa: "سوالات و درخواست‌های خود را از طریق فرم زیر ارسال کنید.",
   };
+  const bcAria = { en: "Breadcrumb", tr: "Sayfa konumu", ar: "مسار التصفح", fa: "مسیر صفحه" };
   const bs = rtl ? "bootstrap.rtl.min.css" : "bootstrap.min.css";
   const skipPos = rtl ? "end-0" : "start-0";
   return `<!DOCTYPE html>
@@ -459,7 +479,7 @@ ${head(locale, "", bs, "contact.html", [{ name: x.home, url: "index.html" }, { n
 ${nav(locale, "contact")}
     <main id="main" class="flex-grow-1 py-4 py-lg-5">
       <div class="container">
-        <nav class="hp3-breadcrumb-wrap mb-3" aria-label="${locale === "tr" ? "Sayfa konumu" : locale === "ar" ? "مسار التصفح" : "مسیر"}">
+        <nav class="hp3-breadcrumb-wrap mb-3" aria-label="${bcAria[locale]}">
           <ol class="breadcrumb hp3-breadcrumb mb-0">
             <li class="breadcrumb-item"><a href="index.html">${x.home}</a></li>
             <li class="breadcrumb-item active" aria-current="page">${x.contact}</li>
@@ -880,12 +900,11 @@ ${nav(locale, "home")}
         <img
           class="hp3-hero-photo-img"
           src="../images/lta-shopsforsalefromhayatpark-6.webp"
-          alt=""
+          alt="${HERO_ALT[locale]}"
           width="1920"
           height="1080"
           fetchpriority="high"
           decoding="async"
-          aria-hidden="true"
         />
         <div class="container">
           <div class="hp3-hero-inner hp3-hero-inner-statement py-lg-2">
