@@ -14,28 +14,31 @@
   --font-sans-ltr: "Noto Sans", system-ui, -apple-system, "Segoe UI", Roboto,
     Arial, sans-serif;
   --font-rtl: "Noto Sans Arabic", "Vazirmatn", "Tahoma", Arial, sans-serif;
-  /* Light blue fills for buttons — high contrast with navy text */
+  /* Light yellow fills for buttons — high contrast with navy text */
   --hp3-btn-light-fill: linear-gradient(
     165deg,
-    #f4f9ff 0%,
-    #e3eefc 52%,
-    #d9e9fa 100%
+    #fffef5 0%,
+    #fff6c9 52%,
+    #ffefab 100%
   );
   --hp3-btn-light-fill-hover: linear-gradient(
     165deg,
-    #eaf3fc 0%,
-    #d9e9fa 50%,
-    #cfe3f8 100%
+    #fff9dc 0%,
+    #ffefab 50%,
+    #ffe684 100%
   );
-  --hp3-btn-light-border: #b3cfec;
-  --hp3-btn-light-border-hover: #8eb7e4;
+  --hp3-btn-light-border: #e6cf6a;
+  --hp3-btn-light-border-hover: #d4b84a;
+  --hp3-btn-text: var(--hp3-navy-dark);
   --hp3-hero-photo-url: url("../../images/lta-shopsforsalefromhayatpark-6.webp");
   --hp3-hero-photo-overlay: linear-gradient(
     120deg,
-    rgba(10, 27, 47, 0.82) 0%,
-    rgba(15, 39, 68, 0.76) 45%,
-    rgba(30, 73, 118, 0.7) 100%
+    rgba(8, 18, 32, 0.92) 0%,
+    rgba(10, 27, 47, 0.88) 45%,
+    rgba(8, 22, 40, 0.86) 100%
   );
+  --hp3-quick-card-bg: rgba(8, 20, 36, 0.78);
+  --hp3-quick-card-border: rgba(255, 255, 255, 0.28);
 }
 
 *,
@@ -366,15 +369,16 @@ html[lang="fa"] body.hp3-body {
   font-size: clamp(1.0625rem, 2.2vw + 0.65rem, 1.4375rem);
   font-weight: 600;
   line-height: 1.65;
+  letter-spacing: 0.01em;
   text-wrap: pretty;
-  text-shadow: 0 1px 14px rgba(0, 0, 0, 0.45);
-  background: rgba(10, 27, 47, 0.52);
-  border: 1px solid rgba(255, 255, 255, 0.18);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4), 0 0.35rem 1.25rem rgba(0, 0, 0, 0.3);
+  background: rgba(8, 18, 32, 0.72);
+  border: 1px solid rgba(255, 255, 255, 0.22);
   border-radius: var(--hp3-radius);
   padding: 1.25rem 1.35rem;
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.22);
+  backdrop-filter: blur(12px) saturate(120%);
+  -webkit-backdrop-filter: blur(12px) saturate(120%);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.28);
 }
 
 @media (min-width: 768px) {
@@ -461,44 +465,82 @@ html[lang="fa"] body.hp3-body {
   margin-bottom: 0.5rem;
 }
 
-/* Buttons — light blue for strong label contrast */
+/* Buttons — light yellow sitewide */
+.hp3-body .btn-primary,
+.hp3-body .btn.btn-primary,
 .btn.hp3-btn-primary {
   background: var(--hp3-btn-light-fill);
-  color: var(--hp3-navy);
+  color: var(--hp3-btn-text);
   border: 1px solid var(--hp3-btn-light-border);
   font-weight: 600;
   border-radius: var(--hp3-radius);
-  padding-inline: 1.35rem;
-  box-shadow: 0 0.35rem 1rem rgba(30, 73, 118, 0.12);
-  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.45);
+  box-shadow: 0 0.35rem 1rem rgba(10, 27, 47, 0.14);
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.35);
 }
 
+.hp3-body .btn-primary:hover,
+.hp3-body .btn-primary:focus-visible,
+.hp3-body .btn.btn-primary:hover,
+.hp3-body .btn.btn-primary:focus-visible,
 .btn.hp3-btn-primary:hover,
 .btn.hp3-btn-primary:focus-visible {
   background: var(--hp3-btn-light-fill-hover);
-  color: var(--hp3-navy-dark);
+  color: var(--hp3-btn-text);
   border-color: var(--hp3-btn-light-border-hover);
   opacity: 1;
 }
 
+.hp3-body .btn-primary:focus-visible,
+.hp3-body .btn.btn-primary:focus-visible,
 .btn.hp3-btn-primary:focus-visible {
   outline: none;
-  box-shadow: 0 0 0 0.2rem rgba(30, 73, 118, 0.28), 0 0.35rem 1rem rgba(30, 73, 118, 0.12);
+  box-shadow: 0 0 0 0.2rem rgba(230, 207, 106, 0.45), 0 0.35rem 1rem rgba(10, 27, 47, 0.14);
+}
+
+.hp3-body .btn-outline-secondary,
+.hp3-body .btn.btn-outline-secondary,
+.btn.hp3-btn-outline,
+.btn.btn-light.hp3-btn-outline {
+  border-radius: var(--hp3-radius);
+  border-color: var(--hp3-btn-light-border);
+  color: var(--hp3-btn-text);
+  font-weight: 600;
+  background: var(--hp3-btn-light-fill);
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+.hp3-body .btn-outline-secondary:hover,
+.hp3-body .btn-outline-secondary:focus-visible,
+.hp3-body .btn.btn-outline-secondary:hover,
+.hp3-body .btn.btn-outline-secondary:focus-visible,
+.btn.hp3-btn-outline:hover,
+.btn.hp3-btn-outline:focus-visible,
+.btn.btn-light.hp3-btn-outline:hover,
+.btn.btn-light.hp3-btn-outline:focus-visible {
+  border-color: var(--hp3-btn-light-border-hover);
+  color: var(--hp3-btn-text);
+  background: var(--hp3-btn-light-fill-hover);
+}
+
+.hp3-body .btn-light:not(.hp3-btn-outline) {
+  background: var(--hp3-btn-light-fill);
+  color: var(--hp3-btn-text);
+  border: 1px solid var(--hp3-btn-light-border);
+}
+
+.hp3-body .btn-light:not(.hp3-btn-outline):hover,
+.hp3-body .btn-light:not(.hp3-btn-outline):focus-visible {
+  background: var(--hp3-btn-light-fill-hover);
+  color: var(--hp3-btn-text);
+  border-color: var(--hp3-btn-light-border-hover);
+}
+
+.btn.hp3-btn-primary {
+  padding-inline: 1.35rem;
 }
 
 .btn.hp3-btn-outline:not(.btn-outline-light):not(.btn-light) {
-  border-radius: var(--hp3-radius);
-  border-color: var(--hp3-btn-light-border);
-  color: var(--hp3-accent);
-  font-weight: 600;
-  background: rgba(244, 249, 255, 0.65);
-}
-
-.btn.hp3-btn-outline:not(.btn-outline-light):not(.btn-light):hover,
-.btn.hp3-btn-outline:not(.btn-outline-light):not(.btn-light):focus-visible {
-  border-color: var(--hp3-btn-light-border-hover);
-  color: var(--hp3-navy);
-  background: #f4f9ff;
+  background: var(--hp3-btn-light-fill);
 }
 
 /* Alerts / emergencies */
@@ -661,13 +703,32 @@ html[dir="rtl"] .breadcrumb.hp3-breadcrumb {
   border: 0;
 }
 
-/* Quick nav cards on home */
+/* Quick nav cards on home — frosted panel over hero photo */
+.hp3-quick-card {
+  background: var(--hp3-quick-card-bg) !important;
+  backdrop-filter: blur(14px) saturate(120%);
+  -webkit-backdrop-filter: blur(14px) saturate(120%);
+  border: 1px solid var(--hp3-quick-card-border) !important;
+  box-shadow: 0 0.65rem 1.75rem rgba(0, 0, 0, 0.28);
+}
+
 .hp3-quick-card .card-body {
   min-height: 7.5rem;
 }
 
+.hp3-quick-card h2,
+.hp3-quick-card .h6 {
+  color: #fff;
+}
+
+.hp3-quick-card .text-white-50,
+.hp3-quick-card .small.text-white-50 {
+  color: rgba(255, 255, 255, 0.9) !important;
+}
+
 .hp3-quick-card .btn {
   min-height: 2.75rem;
+  box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.18);
 }
 
 /* Gallery filter buttons */

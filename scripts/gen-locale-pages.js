@@ -858,7 +858,7 @@ function indexPage(locale) {
   const quickCardsHtml = cards
     .map(
       (c) => `            <div class="col-6 col-md-4 col-lg">
-              <article class="card hp3-card hp3-quick-card border-0 h-100 bg-white bg-opacity-10 border border-light border-opacity-25">
+              <article class="card hp3-card hp3-quick-card border-0 h-100">
                 <div class="card-body d-flex flex-column">
                   <h2 class="h6 text-white mb-2">${c.title}</h2>
                   <p class="small text-white-50 flex-grow-1 mb-3">${c.desc}</p>
