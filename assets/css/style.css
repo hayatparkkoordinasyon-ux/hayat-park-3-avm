@@ -14,21 +14,21 @@
   --font-sans-ltr: "Noto Sans", system-ui, -apple-system, "Segoe UI", Roboto,
     Arial, sans-serif;
   --font-rtl: "Noto Sans Arabic", "Vazirmatn", "Tahoma", Arial, sans-serif;
-  /* Light yellow fills for buttons — high contrast with navy text */
+  /* Light turquoise fills for buttons — high contrast with navy text */
   --hp3-btn-light-fill: linear-gradient(
     165deg,
-    #fffef5 0%,
-    #fff6c9 52%,
-    #ffefab 100%
+    #edfcfa 0%,
+    #c5f2ec 52%,
+    #afece4 100%
   );
   --hp3-btn-light-fill-hover: linear-gradient(
     165deg,
-    #fff9dc 0%,
-    #ffefab 50%,
-    #ffe684 100%
+    #d8f7f3 0%,
+    #afece4 50%,
+    #8de0d6 100%
   );
-  --hp3-btn-light-border: #e6cf6a;
-  --hp3-btn-light-border-hover: #d4b84a;
+  --hp3-btn-light-border: #6ec9bf;
+  --hp3-btn-light-border-hover: #48b8ab;
   --hp3-btn-text: var(--hp3-navy-dark);
   --hp3-hero-photo-url: url("../../images/lta-shopsforsalefromhayatpark-6.webp");
   /* Mobile-first: stronger overlays for readability on small screens */
@@ -195,7 +195,7 @@ html[lang="fa"] body.hp3-body {
     background: var(--hp3-btn-light-fill) !important;
     border-color: var(--hp3-btn-light-border) !important;
     color: var(--hp3-btn-text) !important;
-    -webkit-tap-highlight-color: rgba(255, 230, 132, 0.45);
+    -webkit-tap-highlight-color: rgba(141, 224, 214, 0.45);
   }
 
   .hp3-body .btn:hover,
@@ -444,6 +444,23 @@ html[lang="fa"] body.hp3-body {
   color: rgba(255, 255, 255, 0.78) !important;
 }
 
+/* Root language picker — turquoise card CTAs on index.html */
+.hp3-index-bg .hp3-card {
+  background: linear-gradient(165deg, #f7fefd 0%, #edf9f7 100%);
+  border-color: rgba(110, 201, 191, 0.65);
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    transform 0.2s ease;
+}
+
+.hp3-index-bg .hp3-card:hover,
+.hp3-index-bg .hp3-card:focus-visible {
+  border-color: #48b8ab;
+  box-shadow: 0 0.55rem 1.25rem rgba(72, 184, 171, 0.22);
+  transform: translateY(-2px);
+}
+
 .hp3-hero.hp3-hero-photo > .container {
   position: relative;
   z-index: 2;
@@ -573,7 +590,7 @@ html[lang="fa"] body.hp3-body {
   margin-bottom: 0.5rem;
 }
 
-/* Buttons — light yellow sitewide */
+/* Buttons — light turquoise sitewide */
 .hp3-body .btn-primary,
 .hp3-body .btn.btn-primary,
 .btn.hp3-btn-primary {
@@ -605,7 +622,7 @@ html[lang="fa"] body.hp3-body {
 .hp3-body .btn.btn-primary:focus-visible,
 .btn.hp3-btn-primary:focus-visible {
   outline: none;
-  box-shadow: 0 0 0 0.2rem rgba(230, 207, 106, 0.45), 0 0.35rem 1rem rgba(10, 27, 47, 0.14);
+  box-shadow: 0 0 0 0.2rem rgba(110, 201, 191, 0.45), 0 0.35rem 1rem rgba(10, 27, 47, 0.14);
 }
 
 .hp3-body .btn-outline-secondary,
@@ -659,19 +676,19 @@ html[lang="fa"] body.hp3-body {
   border: 1px solid var(--hp3-btn-light-border);
 }
 
-/* Bootstrap 5 btn tokens — keep yellow on tap/hover (especially mobile) */
+/* Bootstrap 5 btn tokens — light turquoise on tap/hover */
 .hp3-body .btn {
-  --bs-btn-bg: #fff6c9;
-  --bs-btn-border-color: #e6cf6a;
+  --bs-btn-bg: #c5f2ec;
+  --bs-btn-border-color: #6ec9bf;
   --bs-btn-color: #0a1b2f;
-  --bs-btn-hover-bg: #ffefab;
-  --bs-btn-hover-border-color: #d4b84a;
+  --bs-btn-hover-bg: #afece4;
+  --bs-btn-hover-border-color: #48b8ab;
   --bs-btn-hover-color: #0a1b2f;
-  --bs-btn-active-bg: #ffe684;
-  --bs-btn-active-border-color: #c9a83a;
+  --bs-btn-active-bg: #8de0d6;
+  --bs-btn-active-border-color: #3aa89c;
   --bs-btn-active-color: #0a1b2f;
-  --bs-btn-disabled-bg: #fff6c9;
-  --bs-btn-disabled-border-color: #e6cf6a;
+  --bs-btn-disabled-bg: #c5f2ec;
+  --bs-btn-disabled-border-color: #6ec9bf;
   --bs-btn-disabled-color: #0a1b2f;
 }
 
