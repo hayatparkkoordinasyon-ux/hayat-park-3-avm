@@ -1,9 +1,13 @@
 /**
- * One-off generator for tr/ar/fa inner pages (photos, videos, contact, announcements, meetings).
+ * Generates all locale pages (en/tr/ar/fa): index, photos, videos, contact, announcements, meetings.
  * Run: node scripts/gen-locale-pages.js
+ * Then: node scripts/inject-seo-static.js  (about, register, root language picker)
  */
 const fs = require("fs");
 const path = require("path");
+const { buildSeoHead, buildWebPageJsonLd, getPageSeo } = require("./seo-meta");
+
+const LOCALES = ["en", "tr", "ar", "fa"];
 
 const root = path.join(__dirname, "..");
 
@@ -58,7 +62,62 @@ ${x.footerLinks}
         </div>`;
 }
 
+const QUICK_CARDS = {
+  en: [
+    { href: "announcements.html", title: "Announcements", desc: "Official notices and short summaries.", btn: "Open", primary: false },
+    { href: "photos.html", title: "Photos", desc: "Construction progress, meetings, and drone images.", btn: "Open", primary: false },
+    { href: "videos.html", title: "Videos", desc: "Project updates and recorded meetings.", btn: "Open", primary: false },
+    { href: "meetings.html", title: "Meetings", desc: "Dates and written summaries.", btn: "Open", primary: false },
+    { href: "contact.html", title: "Contact", desc: "Send a message via Google Form.", btn: "Open", primary: true },
+  ],
+  tr: [
+    { href: "announcements.html", title: "Duyurular", desc: "Resmi duyurular ve kısa özetler.", btn: "Aç", primary: false },
+    { href: "photos.html", title: "Fotoğraflar", desc: "İlerleme, toplantı ve drone görselleri.", btn: "Aç", primary: false },
+    { href: "videos.html", title: "Videolar", desc: "Proje güncellemeleri ve kayıtlı toplantılar.", btn: "Aç", primary: false },
+    { href: "meetings.html", title: "Toplantılar", desc: "Tarihler ve yazılı özetler.", btn: "Aç", primary: false },
+    { href: "contact.html", title: "İletişim", desc: "Google Form ile mesaj.", btn: "Aç", primary: true },
+  ],
+  ar: [
+    { href: "announcements.html", title: "الإعلانات", desc: "إشعارات رسمية وملخصات قصيرة.", btn: "فتح", primary: false },
+    { href: "photos.html", title: "الصور", desc: "تقدم الإنشاءات، الاجتماعات والصور الجوية.", btn: "فتح", primary: false },
+    { href: "videos.html", title: "مقاطع فيديو", desc: "تحديثات المشروع واجتماعات مسجلة.", btn: "فتح", primary: false },
+    { href: "meetings.html", title: "الاجتماعات", desc: "التواريخ والملخصات المكتوبة.", btn: "فتح", primary: false },
+    { href: "contact.html", title: "اتصل بنا", desc: "رسالة عبر Google Form.", btn: "فتح", primary: true },
+  ],
+  fa: [
+    { href: "announcements.html", title: "اطلاعیه‌ها", desc: "اطلاعیه‌های رسمی و خلاصه‌های کوتاه.", btn: "باز کردن", primary: false },
+    { href: "photos.html", title: "تصاویر", desc: "پیشرفت ساخت، جلسات و تصاویر پهپادی.", btn: "باز کردن", primary: false },
+    { href: "videos.html", title: "ویدئوها", desc: "به‌روزرسانی پروژه و جلسات ضبط‌شده.", btn: "باز کردن", primary: false },
+    { href: "meetings.html", title: "جلسات", desc: "تاریخ‌ها و خلاصه‌های نوشتاری.", btn: "باز کردن", primary: false },
+    { href: "contact.html", title: "تماس", desc: "پیام از طریق Google Form.", btn: "باز کردن", primary: true },
+  ],
+};
+
 const L = {
+  en: {
+    navLabel: "Footer navigation",
+    skip: "Skip to content",
+    brandSub: "Owners · Information desk",
+    navToggle: "Toggle navigation",
+    home: "Home",
+    photos: "Photos",
+    videos: "Videos",
+    ann: "Announcements",
+    mtg: "Meetings",
+    contact: "Contact",
+    langLabel: "English",
+    footerLinks: `            <a href="index.html">Home</a>
+            <span class="text-white-50 d-none d-sm-inline">&nbsp;·&nbsp;</span>
+            <a href="photos.html">Photos</a>
+            <span class="text-white-50 d-none d-sm-inline">&nbsp;·&nbsp;</span>
+            <a href="videos.html">Videos</a>
+            <span class="text-white-50 d-none d-sm-inline">&nbsp;·&nbsp;</span>
+            <a href="announcements.html">Announcements</a>
+            <span class="text-white-50 d-none d-sm-inline">&nbsp;·&nbsp;</span>
+            <a href="meetings.html">Meetings</a>
+            <span class="text-white-50 d-none d-sm-inline">&nbsp;·&nbsp;</span>
+            <a href="contact.html">Contact</a>`,
+  },
   tr: {
     navLabel: "Alt bilgi menüsü",
     skip: "İçeriğe geç",
@@ -190,21 +249,40 @@ ${langDropdown(locale)}
     </nav>`;
 }
 
-function head(locale, title, desc, extraLinks, bootstrapFile) {
+function head(locale, extraLinks, bootstrapFile, slug, breadcrumbs) {
   const rtl = locale === "ar" || locale === "fa";
   const integ =
     bootstrapFile === "bootstrap.min.css"
       ? ' integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous"'
-      : " crossorigin=\"anonymous\"";
+      : ' crossorigin="anonymous"';
   const rtlCss = rtl ? '\n    <link rel="stylesheet" href="../assets/css/rtl.css" />' : "";
+  const pageSlug = slug || "index.html";
+  const meta = getPageSeo(locale, pageSlug);
+  const seo = buildSeoHead({
+    locale,
+    slug: pageSlug,
+    title: meta.title,
+    description: meta.description,
+    preloadHero: meta.preloadHero,
+  });
+  const jsonLd = buildWebPageJsonLd({
+    locale,
+    slug: pageSlug,
+    title: meta.title,
+    description: meta.description,
+    breadcrumbs,
+    includeSiteGraph: meta.includeSiteGraph,
+  });
   return `  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-    <meta name="description" content="${desc}" />
+    <!-- HP3-SEO-START -->
+${seo}
+    <!-- HP3-SEO-END -->
     <meta name="theme-color" content="#0a1b2f" />
     <meta name="mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
-    <title>${title}</title>
+    <meta name="apple-mobile-web-app-title" content="Hayat Park 3" />
     <link rel="manifest" href="../manifest.webmanifest" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -212,6 +290,7 @@ function head(locale, title, desc, extraLinks, bootstrapFile) {
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/${bootstrapFile}" rel="stylesheet"${integ} />
     ${extraLinks}
     <link rel="stylesheet" href="../assets/css/style.css" />${rtlCss}
+    ${jsonLd}
   </head>`;
 }
 
@@ -233,6 +312,7 @@ const GL_JS =
   '    <script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js" defer></script>\n    <script src="../assets/js/gallery.js" defer></script>';
 
 const photoFilLabels = {
+  en: ["All", "Construction Progress", "Meeting Photos", "Official Documents", "Drone Imagery"],
   tr: ["Tümü", "İnşaat İlerlemesi", "Toplantı Görselleri", "Resmi Belgeler", "Drone Görselleri"],
   ar: ["الكل", "تقدم الإنشاءات", "صور الاجتماعات", "وثائق رسمية", "صور بطائرة مسيّرة"],
   fa: ["همه", "پیشرفت ساخت", "تصاویر جلسات", "اسناد رسمی", "تصاویر پهپادی"],
@@ -267,7 +347,7 @@ function photosPage(locale) {
   const bs = rtl ? "bootstrap.rtl.min.css" : "bootstrap.min.css";
   return `<!DOCTYPE html>
 <html lang="${locale}" dir="${rtl ? "rtl" : "ltr"}">
-${head(locale, titles[locale], descs[locale], GL_CSS, bs)}
+${head(locale, GL_CSS, bs, "photos.html", [{ name: x.home, url: "index.html" }, { name: x.photos }])}
   <body class="hp3-body d-flex flex-column min-vh-100" data-hp3-gallery-mode="photos">
 ${nav(locale, "photos")}
     <main id="main" class="flex-grow-1 py-4 py-lg-5">
@@ -326,7 +406,7 @@ function videosPage(locale) {
   const bs = rtl ? "bootstrap.rtl.min.css" : "bootstrap.min.css";
   return `<!DOCTYPE html>
 <html lang="${locale}" dir="${rtl ? "rtl" : "ltr"}">
-${head(locale, titles[locale], descs[locale], GL_CSS, bs)}
+${head(locale, GL_CSS, bs, "videos.html", [{ name: x.home, url: "index.html" }, { name: x.videos }])}
   <body class="hp3-body d-flex flex-column min-vh-100" data-hp3-gallery-mode="videos">
 ${nav(locale, "videos")}
     <main id="main" class="flex-grow-1 py-4 py-lg-5">
@@ -373,7 +453,7 @@ function contactPage(locale) {
   const skipPos = rtl ? "end-0" : "start-0";
   return `<!DOCTYPE html>
 <html lang="${locale}" dir="${rtl ? "rtl" : "ltr"}">
-${head(locale, t[locale], d[locale], "", bs)}
+${head(locale, "", bs, "contact.html", [{ name: x.home, url: "index.html" }, { name: x.contact }])}
   <body class="hp3-body d-flex flex-column min-vh-100">
     <a class="visually-hidden-focusable position-absolute top-0 ${skipPos} bg-white px-3 py-2 z-3" href="#main">${x.skip}</a>
 ${nav(locale, "contact")}
@@ -410,6 +490,28 @@ function announcementsPage(locale) {
   const bs = rtl ? "bootstrap.rtl.min.css" : "bootstrap.min.css";
   const skipPos = rtl ? "end-0" : "start-0";
   const content = {
+    en: {
+      h1: "Announcements",
+      sub: "Newest item opens first. Replace PDF links with your files when ready.",
+      i1d: "16 May 2026",
+      i1t: "Trustee bulletin — document workflow",
+      i1p: "How owners submit questions and receive verified attachments.",
+      i1b:
+        "Coordinators collect owner references through the Contact form, verify them against the approved list, then share PDF summaries when trustees publish them. Phone screenshots are not treated as official filings.",
+      i2d: "2 May 2026",
+      i2t: "Site access & safety",
+      i2p: "Escorted visits, protective gear, and contractor hours.",
+      i2b: "Owners must register escorted visits at least two business days in advance. Updated gate rules apply to all visitors.",
+      i3d: "21 April 2026",
+      i3t: "Reporting calendar",
+      i3p: "When consolidated construction updates are planned.",
+      i3b: "Quarterly photo packs and summary PDFs target fixed publication windows; delays are announced here.",
+      i4d: "27 March 2026",
+      i4t: "Drone capture schedule",
+      i4p: "Flight windows for aerial progress photos.",
+      i4b: "Flights follow local aviation notices; galleries show dated thumbnails only after moderation.",
+      pdf: "PDF placeholder",
+    },
     tr: {
       title: "Duyurular — Hayat Park 3 AVM",
       desc: "Malik duyuruları — en yenisi üstte",
@@ -486,7 +588,7 @@ function announcementsPage(locale) {
   const c = content[locale];
   return `<!DOCTYPE html>
 <html lang="${locale}" dir="${rtl ? "rtl" : "ltr"}">
-${head(locale, c.title, c.desc, "", bs)}
+${head(locale, "", bs, "announcements.html", [{ name: x.home, url: "index.html" }, { name: x.ann }])}
   <body class="hp3-body d-flex flex-column min-vh-100">
     <a class="visually-hidden-focusable position-absolute top-0 ${skipPos} bg-white px-3 py-2 z-3" href="#main">${x.skip}</a>
 ${nav(locale, "ann")}
@@ -573,6 +675,27 @@ function meetingsPage(locale) {
   const bs = rtl ? "bootstrap.rtl.min.css" : "bootstrap.min.css";
   const skipPos = rtl ? "end-0" : "start-0";
   const content = {
+    en: {
+      h1: "Meetings",
+      sub: "Latest meeting opens first. Attachments are illustrative until you upload real files.",
+      m1d: "12 May 2026 · Online",
+      m1t: "Monthly coordination call",
+      m1p: "Insurance renewals, scaffolding status, next inspection window.",
+      m1b:
+        "Trustees reviewed pause-period logistics, confirmed moderator contacts, and reiterated that only signed circulars change payment obligations. Meeting photos will appear on the Photos page under “Meeting Photos”.",
+      m2d: "28 April 2026 · Hybrid",
+      m2t: "Escalation workshop",
+      m2p: "Contractor demobilization and owner questions.",
+      m2b: "Summary highlights insurance deadlines, HSE reminders, and asks owners to route personal identifiers through the Contact form instead of chat apps.",
+      m3d: "15 March 2026 · In person",
+      m3t: "Regional listening session",
+      m3p: "Interpreter-supported Q&amp;A.",
+      m3b: "Provided glossary handouts for overseas owners and a mailbox map aligned with announcements.",
+      pdf: "PDF summary (placeholder)",
+      pdf2: "Minutes · PDF placeholder",
+      zip: "Attachment ZIP · placeholder",
+      imgAlt: "Meeting overview placeholder image",
+    },
     tr: {
       title: "Toplantılar — Hayat Park 3 AVM",
       desc: "Malik toplantıları — özet ve ekler",
@@ -646,7 +769,7 @@ function meetingsPage(locale) {
   const c = content[locale];
   return `<!DOCTYPE html>
 <html lang="${locale}" dir="${rtl ? "rtl" : "ltr"}">
-${head(locale, c.title, c.desc, "", bs)}
+${head(locale, "", bs, "meetings.html", [{ name: x.home, url: "index.html" }, { name: x.mtg }])}
   <body class="hp3-body d-flex flex-column min-vh-100">
     <a class="visually-hidden-focusable position-absolute top-0 ${skipPos} bg-white px-3 py-2 z-3" href="#main">${x.skip}</a>
 ${nav(locale, "mtg")}
@@ -725,8 +848,78 @@ ${footer(locale, "")}
 </html>`;
 }
 
-["tr", "ar", "fa"].forEach((loc) => {
+function indexPage(locale) {
+  const rtl = locale === "ar" || locale === "fa";
+  const x = L[locale];
+  const purpose = SITE_PURPOSE[locale];
+  const cards = QUICK_CARDS[locale];
+  const bs = rtl ? "bootstrap.rtl.min.css" : "bootstrap.min.css";
+  const skipPos = rtl ? "end-0" : "start-0";
+  const quickCardsHtml = cards
+    .map(
+      (c) => `            <div class="col-6 col-md-4 col-lg">
+              <article class="card hp3-card hp3-quick-card border-0 h-100 bg-white bg-opacity-10 border border-light border-opacity-25">
+                <div class="card-body d-flex flex-column">
+                  <h2 class="h6 text-white mb-2">${c.title}</h2>
+                  <p class="small text-white-50 flex-grow-1 mb-3">${c.desc}</p>
+                  <a class="btn ${c.primary ? "hp3-btn-primary" : "btn-light hp3-btn-outline"} stretched-link mt-auto" href="${c.href}">${c.btn}</a>
+                </div>
+              </article>
+            </div>`
+    )
+    .join("\n");
+
+  return `<!DOCTYPE html>
+<html lang="${locale}" dir="${rtl ? "rtl" : "ltr"}">
+${head(locale, "", bs, "index.html")}
+  <body class="hp3-body d-flex flex-column min-vh-100">
+    <a class="visually-hidden-focusable position-absolute top-0 ${skipPos} bg-white px-3 py-2 z-3" href="#main">${x.skip}</a>
+${nav(locale, "home")}
+    <main id="main" class="flex-grow-1">
+      <section class="hp3-hero hp3-hero-photo">
+        <img
+          class="hp3-hero-photo-img"
+          src="../images/lta-shopsforsalefromhayatpark-6.webp"
+          alt=""
+          width="1920"
+          height="1080"
+          fetchpriority="high"
+          decoding="async"
+          aria-hidden="true"
+        />
+        <div class="container">
+          <div class="hp3-hero-inner hp3-hero-inner-statement py-lg-2">
+            <h1 class="hp3-hero-statement mb-0">${purpose.p1}</h1>
+          </div>
+          <div class="row g-3 mt-4">
+${quickCardsHtml}
+          </div>
+        </div>
+      </section>
+
+      <section class="hp3-purpose-section py-5" aria-labelledby="hp3-purpose-title">
+        <div class="container">
+          <div class="row justify-content-center">
+            <div class="col-lg-10">
+              <article class="hp3-purpose-card">
+                <span class="hp3-purpose-kicker">${purpose.kicker}</span>
+                <h2 id="hp3-purpose-title" class="h4 hp3-section-title mb-4">${purpose.title}</h2>
+                <p class="hp3-purpose-lead mb-3">${purpose.p1}</p>
+                <p class="hp3-purpose-text mb-0">${purpose.p2}</p>
+              </article>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+${footer(locale, "")}
+  </body>
+</html>`;
+}
+
+LOCALES.forEach((loc) => {
   const dir = path.join(root, loc);
+  fs.writeFileSync(path.join(dir, "index.html"), indexPage(loc));
   fs.writeFileSync(path.join(dir, "photos.html"), photosPage(loc));
   fs.writeFileSync(path.join(dir, "videos.html"), videosPage(loc));
   fs.writeFileSync(path.join(dir, "contact.html"), contactPage(loc));
@@ -734,4 +927,4 @@ ${footer(locale, "")}
   fs.writeFileSync(path.join(dir, "meetings.html"), meetingsPage(loc));
 });
 
-console.log("Wrote tr/ar/fa photos, videos, contact, announcements, meetings.");
+console.log("Wrote en/tr/ar/fa index, photos, videos, contact, announcements, meetings.");
