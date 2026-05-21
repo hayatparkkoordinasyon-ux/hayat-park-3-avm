@@ -44,6 +44,8 @@
   --hp3-space-section-y: 2rem;
   --hp3-space-hero-y: 2.5rem;
   --hp3-gutter-x: 2rem; /* 1rem side padding on narrow viewports */
+  --hp3-page-bg: var(--hp3-soft);
+  --hp3-content-width: 100%;
 }
 
 @media (min-width: 576px) {
@@ -54,6 +56,7 @@
 
 @media (min-width: 992px) {
   :root {
+    --hp3-content-width: 80vw;
     --hp3-hero-photo-overlay: linear-gradient(
       120deg,
       rgba(8, 18, 32, 0.92) 0%,
@@ -79,13 +82,18 @@ html {
   overflow-x: clip;
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
+  background-color: var(--hp3-page-bg);
+}
+
+html:has(body.hp3-index-bg) {
+  background-color: var(--hp3-navy-dark);
 }
 
 body.hp3-body {
   font-family: var(--font-sans-ltr);
   font-size: 1rem;
   color: var(--hp3-navy-dark);
-  background: #fff;
+  background-color: var(--hp3-page-bg);
   line-height: 1.65;
   min-height: 100dvh;
   overflow-x: hidden;
@@ -95,15 +103,33 @@ body.hp3-body {
   -webkit-font-smoothing: antialiased;
 }
 
+/* Layout — desktop-first: 80vw content column, full-width shell (nav/footer) */
 .hp3-body main,
 .hp3-body .container {
   min-width: 0;
-  max-width: 100%;
 }
 
 .hp3-body .container {
   padding-left: max(calc(var(--hp3-gutter-x) * 0.5), env(safe-area-inset-left, 0));
   padding-right: max(calc(var(--hp3-gutter-x) * 0.5), env(safe-area-inset-right, 0));
+}
+
+.hp3-body .navbar.hp3-navbar > .container,
+.hp3-body .hp3-footer > .container {
+  width: 100%;
+  max-width: none;
+}
+
+.hp3-body main .container,
+.hp3-body .hp3-purpose-section > .container,
+.hp3-body .hp3-hero.hp3-hero-photo > .container {
+  width: 100%;
+  max-width: var(--hp3-content-width);
+  margin-inline: auto;
+}
+
+.hp3-body main {
+  background-color: transparent;
 }
 
 .hp3-body .row > [class*="col-"] {
@@ -356,8 +382,10 @@ html[lang="fa"] body.hp3-body {
   font-weight: 400;
 }
 
-/* Navbar */
+/* Navbar — full viewport width; inner shell aligns to page edges */
 .navbar.hp3-navbar {
+  width: 100%;
+  max-width: none;
   background: var(--hp3-nav-bg) !important;
   backdrop-filter: none;
   border-bottom: 1px solid rgba(15, 39, 68, 0.08);
@@ -427,7 +455,7 @@ html[lang="fa"] body.hp3-body {
   box-shadow: 0 0 0 0.25rem rgba(30, 73, 118, 0.15);
 }
 
-/* Hero — mobile-first spacing and contrast */
+/* Hero — full-bleed band; inner content follows --hp3-content-width */
 .hp3-hero {
   background: linear-gradient(
       135deg,
@@ -438,8 +466,8 @@ html[lang="fa"] body.hp3-body {
     radial-gradient(circle at 80% 0%, rgba(255, 255, 255, 0.06), transparent);
   color: #fff;
   padding: var(--hp3-space-hero-y) 0 calc(var(--hp3-space-hero-y) - 0.25rem);
-  border-radius: 0 0 1.125rem 1.125rem;
-  box-shadow: 0 28px 60px rgba(15, 39, 68, 0.18);
+  border-radius: 0;
+  box-shadow: none;
 }
 
 .hp3-body.hp3-index-bg {
@@ -453,6 +481,7 @@ html[lang="fa"] body.hp3-body {
 .hp3-hero.hp3-hero-photo {
   position: relative;
   overflow: hidden;
+  width: 100%;
   background-color: var(--hp3-navy-dark);
   background-image: var(--hp3-hero-photo-overlay);
   background-size: cover;
@@ -596,12 +625,6 @@ html[lang="fa"] body.hp3-body {
   text-transform: uppercase;
 }
 
-@media (min-width: 992px) {
-  .hp3-hero {
-    border-radius: 0 0 2rem 2rem;
-  }
-}
-
 .hp3-hero-metrics .metric {
   background: rgba(255, 255, 255, 0.1);
   border: 1px solid rgba(255, 255, 255, 0.35);
@@ -622,8 +645,8 @@ html[lang="fa"] body.hp3-body {
 }
 
 .hp3-section-alt {
-  background: var(--hp3-soft);
-  border-block: 1px solid var(--hp3-border);
+  background: var(--hp3-page-bg);
+  border-block: none;
 }
 
 .hp3-section-title {
@@ -778,8 +801,10 @@ html[lang="fa"] body.hp3-body {
   background: #fff;
 }
 
-/* Footer */
+/* Footer — full-width band; shell container spans viewport edges */
 .hp3-footer {
+  width: 100%;
+  max-width: none;
   background: var(--hp3-navy-dark);
   color: rgba(255, 255, 255, 0.92);
 }
@@ -818,7 +843,7 @@ html[lang="fa"] body.hp3-body {
 
 /* Site purpose — index highlight + shared typography */
 .hp3-purpose-section {
-  background: var(--hp3-soft);
+  background: transparent;
   padding-block: 2rem;
 }
 
