@@ -3,22 +3,21 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-    <meta name="description" content="اجتماعات الملخصات والمرفقات" />
+    <meta name="description" content="أرشيف صور مشروع حياة بارك 3" />
     <meta name="theme-color" content="#0a1b2f" />
     <meta name="mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
-    <title>الاجتماعات — Hayat Park 3</title>
+    <title>الصور — Hayat Park 3</title>
     <link rel="manifest" href="../manifest.webmanifest" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;600;700&amp;family=Noto+Sans+Arabic:wght@400;600;700&amp;family=Vazirmatn:wght@400;600;700&amp;display=swap" rel="stylesheet" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.rtl.min.css" rel="stylesheet" crossorigin="anonymous" />
-    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" />
     <link rel="stylesheet" href="../assets/css/style.css" />
     <link rel="stylesheet" href="../assets/css/rtl.css" />
   </head>
-  <body class="hp3-body d-flex flex-column min-vh-100">
-    <a class="visually-hidden-focusable position-absolute top-0 end-0 bg-white px-3 py-2 z-3" href="#main">تخط إلى المحتوى</a>
+  <body class="hp3-body d-flex flex-column min-vh-100" data-hp3-gallery-mode="photos">
     <nav class="navbar navbar-expand-lg navbar-light hp3-navbar sticky-top">
       <div class="container">
         <a class="navbar-brand text-lg-end pe-2" href="index.html">
@@ -31,10 +30,10 @@
         <div class="collapse navbar-collapse" id="hp3Nav">
           <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-lg-center text-end text-lg-start">
             <li class="nav-item"><a class="nav-link" href="index.html">الرئيسية</a></li>
-            <li class="nav-item"><a class="nav-link" href="photos.html">الصور</a></li>
+            <li class="nav-item"><a class="nav-link active" aria-current="page" href="photos.html">الصور</a></li>
             <li class="nav-item"><a class="nav-link" href="videos.html">مقاطع فيديو</a></li>
             <li class="nav-item"><a class="nav-link" href="announcements.html">الإعلانات</a></li>
-            <li class="nav-item"><a class="nav-link active" aria-current="page" href="meetings.html">الاجتماعات</a></li>
+            <li class="nav-item"><a class="nav-link" href="meetings.html">الاجتماعات</a></li>
             <li class="nav-item"><a class="nav-link" href="contact.html">اتصل بنا</a></li>
             <li class="nav-item dropdown hp3-lang ms-lg-2">
               <button class="btn btn-outline-secondary btn-sm dropdown-toggle" id="langMenu" type="button" data-bs-toggle="dropdown" aria-expanded="false">العربية</button>
@@ -51,72 +50,25 @@
     </nav>
     <main id="main" class="flex-grow-1 py-4 py-lg-5">
       <div class="container">
-        <nav class="hp3-breadcrumb-wrap mb-3" aria-label="breadcrumb">
+        <nav class="hp3-breadcrumb-wrap mb-3" aria-label="مسار التصفح">
           <ol class="breadcrumb hp3-breadcrumb mb-0">
             <li class="breadcrumb-item"><a href="index.html">الرئيسية</a></li>
-            <li class="breadcrumb-item active" aria-current="page">الاجتماعات</li>
+            <li class="breadcrumb-item active" aria-current="page">الصور</li>
           </ol>
         </nav>
         <header class="mb-4">
-          <h1 class="h2 hp3-section-title mb-2">الاجتماعات</h1>
-          <p class="text-secondary mb-0">يفتح أحدث اجتماع أولًا.</p>
+          <h1 class="h2 hp3-section-title mb-2">صور المشروع</h1>
+          <p class="text-secondary mb-2">اضغط المصغّرة للعرض الكامل. مرّر للتنقّل على الهاتف.</p>
+          <p class="small text-secondary mb-0">عدد العناصر: <strong class="hp3-gallery-count-live">0</strong></p>
         </header>
-        <div class="accordion shadow-sm rounded-3 overflow-hidden border hp3-card border-0" id="hp3Meetings">
-          <div class="accordion-item border-0 border-bottom">
-            <h2 class="accordion-header">
-              <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#hp3Mt1" aria-expanded="true" aria-controls="hp3Mt1">
-                <span class="d-block text-start w-100 pe-2">
-                  <span class="small text-secondary d-block mb-1">12 مايو 2026 · عبر الإنترنت</span>
-                  <span class="fw-semibold hp3-section-title d-block">اجتماع التنسيق الشهري</span>
-                  <span class="small text-secondary d-block mt-1 mb-0">تجديد التأمين، حالة السقالات، نافذة التفتيش التالية.</span>
-                </span>
-              </button>
-            </h2>
-            <div id="hp3Mt1" class="accordion-collapse collapse show" data-bs-parent="#hp3Meetings">
-              <div class="accordion-body bg-white">
-                <div class="ratio ratio-16x9 mb-3 rounded overflow-hidden border">
-                  <img class="object-fit-cover" src="https://picsum.photos/seed/hp3-meeting-cover/960/540" alt="صورة توضيحية للاجتماع" loading="lazy" decoding="async" width="960" height="540" />
-                </div>
-                <a class="btn hp3-btn-outline btn-sm mb-3" href="#">ملخص PDF (تجريبي)</a>
-                <p class="mb-0">راجع الوصاة لوجستيات فترة التوقف؛ لا تتغير الالتزامات المالية إلا بالتعاميم الموقعة. تُعرض صور الاجتماع في المعرض ضمن «صور الاجتماعات».</p>
-              </div>
-            </div>
-          </div>
-          <div class="accordion-item border-0 border-bottom">
-            <h2 class="accordion-header">
-              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#hp3Mt2" aria-expanded="false" aria-controls="hp3Mt2">
-                <span class="d-block text-start w-100 pe-2">
-                  <span class="small text-secondary d-block mb-1">28 أبريل 2026 · هجين</span>
-                  <span class="fw-semibold hp3-section-title d-block">ورشة تصعيد</span>
-                  <span class="small text-secondary d-block mt-1 mb-0">انسحاب المقاولين وأسئلة الملاك.</span>
-                </span>
-              </button>
-            </h2>
-            <div id="hp3Mt2" class="accordion-collapse collapse" data-bs-parent="#hp3Meetings">
-              <div class="accordion-body bg-white">
-                <a class="btn hp3-btn-outline btn-sm mb-3" href="#">محضر · PDF تجريبي</a>
-                <p class="mb-0">يلخص المواعيد النهائية للتأمين وتذكيرات السلامة ويطلب إرسال المعرفات الشخصية عبر نموذج التواصل.</p>
-              </div>
-            </div>
-          </div>
-          <div class="accordion-item border-0">
-            <h2 class="accordion-header">
-              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#hp3Mt3" aria-expanded="false" aria-controls="hp3Mt3">
-                <span class="d-block text-start w-100 pe-2">
-                  <span class="small text-secondary d-block mb-1">15 مارس 2026 · حضوري</span>
-                  <span class="fw-semibold hp3-section-title d-block">جلسة استماع إقليمية</span>
-                  <span class="small text-secondary d-block mt-1 mb-0">أسئلة وأجوبة بدعم المترجمين.</span>
-                </span>
-              </button>
-            </h2>
-            <div id="hp3Mt3" class="accordion-collapse collapse" data-bs-parent="#hp3Meetings">
-              <div class="accordion-body bg-white">
-                <a class="btn hp3-btn-outline btn-sm mb-3" href="#">ملحق ZIP · تجريبي</a>
-                <p class="mb-0">قدّمت مسارد مصطلحات لملاك الخارج وخريطة بريد متوافقة مع الإعلانات.</p>
-              </div>
-            </div>
-          </div>
+        <div class="hp3-gallery-filters d-flex flex-wrap gap-2 mb-4" role="toolbar" aria-label="الصور">
+          <button type="button" class="btn btn-primary hp3-filter-btn active" data-filter="all" data-hp3-filter-all><span>الكل</span></button>
+          <button type="button" class="btn btn-outline-secondary hp3-filter-btn" data-filter="construction">تقدم الإنشاءات</button>
+          <button type="button" class="btn btn-outline-secondary hp3-filter-btn" data-filter="meetings">صور الاجتماعات</button>
+          <button type="button" class="btn btn-outline-secondary hp3-filter-btn" data-filter="documents">وثائق رسمية</button>
+          <button type="button" class="btn btn-outline-secondary hp3-filter-btn" data-filter="drone">صور بطائرة مسيّرة</button>
         </div>
+        <div id="hp3-gallery-root" class="row g-4" aria-live="polite"></div>
       </div>
     </main>
     <footer class="hp3-footer hp3-footer-simple pt-4 pb-4 mt-auto" role="contentinfo">
@@ -146,7 +98,8 @@
     <script src="../assets/js/language-switcher.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous" defer></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js" defer></script>
+    <script src="../assets/js/gallery.js" defer></script>
     <script src="../assets/js/main.js" defer></script>
   </body>
 </html>

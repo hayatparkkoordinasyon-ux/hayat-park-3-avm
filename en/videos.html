@@ -3,11 +3,11 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-    <meta name="description" content="Hayat Park 3 owner meetings — summaries, dates, optional attachments." />
+    <meta name="description" content="Hayat Park 3 — project videos with GLightbox viewer." />
     <meta name="theme-color" content="#0a1b2f" />
     <meta name="mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
-    <title>Meetings — Hayat Park 3 AVM</title>
+    <title>Videos — Hayat Park 3 AVM</title>
     <link rel="manifest" href="../manifest.webmanifest" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -15,10 +15,16 @@
       href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;600;700&family=Noto+Sans+Arabic:wght@400;600;700&family=Vazirmatn:wght@400;600;700&display=swap"
       rel="stylesheet"
     />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" />
     <link rel="stylesheet" href="../assets/css/style.css" />
   </head>
-  <body class="hp3-body d-flex flex-column min-vh-100">
+  <body class="hp3-body d-flex flex-column min-vh-100" data-hp3-gallery-mode="videos">
     <nav class="navbar navbar-expand-lg navbar-light hp3-navbar sticky-top">
       <div class="container">
         <a class="navbar-brand" href="index.html">
@@ -32,9 +38,9 @@
           <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-lg-center">
             <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
             <li class="nav-item"><a class="nav-link" href="photos.html">Photos</a></li>
-            <li class="nav-item"><a class="nav-link" href="videos.html">Videos</a></li>
+            <li class="nav-item"><a class="nav-link active" aria-current="page" href="videos.html">Videos</a></li>
             <li class="nav-item"><a class="nav-link" href="announcements.html">Announcements</a></li>
-            <li class="nav-item"><a class="nav-link active" aria-current="page" href="meetings.html">Meetings</a></li>
+            <li class="nav-item"><a class="nav-link" href="meetings.html">Meetings</a></li>
             <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
             <li class="nav-item dropdown hp3-lang ms-lg-2">
               <button class="btn btn-outline-secondary btn-sm dropdown-toggle" id="langMenu" type="button" data-bs-toggle="dropdown" aria-expanded="false">English</button>
@@ -55,86 +61,23 @@
         <nav class="hp3-breadcrumb-wrap mb-3" aria-label="breadcrumb">
           <ol class="breadcrumb hp3-breadcrumb mb-0">
             <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Meetings</li>
+            <li class="breadcrumb-item active" aria-current="page">Videos</li>
           </ol>
         </nav>
 
         <header class="mb-4">
-          <h1 class="h2 hp3-section-title mb-2">Meetings</h1>
-          <p class="text-secondary mb-0">Latest meeting opens first. Attachments are illustrative until you upload real files.</p>
+          <h1 class="h2 hp3-section-title mb-2">Project videos</h1>
+          <p class="text-secondary mb-2">Tap a thumbnail to open the video player. Replace YouTube links in <code>assets/js/gallery.js</code> when your channel is ready.</p>
+          <p class="small text-secondary mb-0">Items: <strong class="hp3-gallery-count-live">0</strong></p>
         </header>
 
-        <div class="accordion shadow-sm rounded-3 overflow-hidden border hp3-card border-0" id="hp3Meetings">
-          <div class="accordion-item border-0 border-bottom">
-            <h2 class="accordion-header">
-              <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#hp3Mt1" aria-expanded="true" aria-controls="hp3Mt1">
-                <span class="d-block text-start w-100 pe-2">
-                  <span class="small text-secondary d-block mb-1">12 May 2026 · Online</span>
-                  <span class="fw-semibold hp3-section-title d-block">Monthly coordination call</span>
-                  <span class="small text-secondary d-block mt-1 mb-0">Insurance renewals, scaffolding status, next inspection window.</span>
-                </span>
-              </button>
-            </h2>
-            <div id="hp3Mt1" class="accordion-collapse collapse show" data-bs-parent="#hp3Meetings">
-              <div class="accordion-body bg-white">
-                <div class="ratio ratio-16x9 mb-3 rounded overflow-hidden border">
-                  <img
-                    class="object-fit-cover"
-                    src="https://picsum.photos/seed/hp3-meeting-cover/960/540"
-                    alt="Meeting overview placeholder image"
-                    loading="lazy"
-                    decoding="async"
-                    width="960"
-                    height="540"
-                  />
-                </div>
-                <a class="btn hp3-btn-outline btn-sm mb-3" href="#">PDF summary (placeholder)</a>
-                <p class="mb-0">
-                  Trustees reviewed pause-period logistics, confirmed moderator contacts, and reiterated that only signed circulars change payment obligations. Meeting photos will appear on the Photos page under “Meeting Photos”.
-                </p>
-              </div>
-            </div>
-          </div>
-          <div class="accordion-item border-0 border-bottom">
-            <h2 class="accordion-header">
-              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#hp3Mt2" aria-expanded="false" aria-controls="hp3Mt2">
-                <span class="d-block text-start w-100 pe-2">
-                  <span class="small text-secondary d-block mb-1">28 April 2026 · Hybrid</span>
-                  <span class="fw-semibold hp3-section-title d-block">Escalation workshop</span>
-                  <span class="small text-secondary d-block mt-1 mb-0">Contractor demobilisation and owner questions.</span>
-                </span>
-              </button>
-            </h2>
-            <div id="hp3Mt2" class="accordion-collapse collapse" data-bs-parent="#hp3Meetings">
-              <div class="accordion-body bg-white">
-                <a class="btn hp3-btn-outline btn-sm mb-3" href="#">Download minutes · PDF placeholder</a>
-                <p class="mb-0">Summary captures insurer deadlines, HSE reminders, and how to route sensitive IDs through the Contact form instead of chat apps.</p>
-              </div>
-            </div>
-          </div>
-          <div class="accordion-item border-0">
-            <h2 class="accordion-header">
-              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#hp3Mt3" aria-expanded="false" aria-controls="hp3Mt3">
-                <span class="d-block text-start w-100 pe-2">
-                  <span class="small text-secondary d-block mb-1">15 March 2026 · In person</span>
-                  <span class="fw-semibold hp3-section-title d-block">Regional listening session</span>
-                  <span class="small text-secondary d-block mt-1 mb-0">Interpreter-supported Q&amp;A.</span>
-                </span>
-              </button>
-            </h2>
-            <div id="hp3Mt3" class="accordion-collapse collapse" data-bs-parent="#hp3Meetings">
-              <div class="accordion-body bg-white">
-                <a class="btn hp3-btn-outline btn-sm mb-3" href="#">Appendix ZIP · placeholder</a>
-                <p class="mb-0">Owners abroad received glossaries for fiduciary terms and a mailbox map matching Announcements PDF references.</p>
-              </div>
-            </div>
-          </div>
-        </div>
+        <div id="hp3-gallery-root" class="row g-4" aria-live="polite"></div>
       </div>
     </main>
 
     <footer class="hp3-footer hp3-footer-simple pt-4 pb-4 mt-auto" role="contentinfo">
-      <div class="container py-3">        <div class="hp3-footer-purpose">
+      <div class="container py-3">
+        <div class="hp3-footer-purpose">
           <p class="small hp3-footer-notice mb-3 mb-md-0">
             This website has been created to enable victims and property owners of HayatPark Shopping Mall to communicate, ask questions, and submit requests. It has no commercial purpose.
           </p>
@@ -163,6 +106,8 @@
     <script src="../assets/js/language-switcher.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js" defer></script>
     <script src="../assets/js/main.js" defer></script>
+    <script src="../assets/js/gallery.js" defer></script>
   </body>
 </html>

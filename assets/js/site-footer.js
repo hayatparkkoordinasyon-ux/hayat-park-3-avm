@@ -76,7 +76,7 @@
     '<div class="d-flex flex-wrap gap-2 gap-sm-3 justify-content-center justify-content-lg-start small">' +
     '<a href="index.html">Ana · Home</a><span class="text-white-50">|</span>' +
     '<a href="about.html">Hakkında · About</a><span class="text-white-50">|</span>' +
-    '<a href="gallery.html">Galeri · Project Photos</a><span class="text-white-50">|</span>' +
+    '<a href="photos.html">Photos</a><span class="text-white-50">|</span><a href="videos.html">Videos</a><span class="text-white-50">|</span>' +
     '<a href="announcements.html">Duyurular · Announcements</a><span class="text-white-50">|</span>' +
     '<a href="meetings.html">Toplantılar · Meetings</a><span class="text-white-50">|</span>' +
     '<a href="contact.html">İletişim · Contact</a><span class="text-white-50">|</span>' +

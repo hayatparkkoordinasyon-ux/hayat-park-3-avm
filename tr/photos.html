@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-    <meta name="description" content="Hayat Park 3 fotoğraf ve video arşivi — GLightbox" />
+    <meta name="description" content="Hayat Park 3 proje fotoğraf arşivi — GLightbox" />
     <meta name="theme-color" content="#0a1b2f" />
     <meta name="mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" />
     <link rel="stylesheet" href="../assets/css/style.css" />
   </head>
-  <body class="hp3-body d-flex flex-column min-vh-100">
+  <body class="hp3-body d-flex flex-column min-vh-100" data-hp3-gallery-mode="photos">
     <nav class="navbar navbar-expand-lg navbar-light hp3-navbar sticky-top">
       <div class="container">
         <a class="navbar-brand" href="index.html">
@@ -29,7 +29,8 @@
         <div class="collapse navbar-collapse" id="hp3Nav">
           <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-lg-center">
             <li class="nav-item"><a class="nav-link" href="index.html">Ana Sayfa</a></li>
-            <li class="nav-item"><a class="nav-link active" aria-current="page" href="gallery.html">Fotoğraflar</a></li>
+            <li class="nav-item"><a class="nav-link active" aria-current="page" href="photos.html">Fotoğraflar</a></li>
+            <li class="nav-item"><a class="nav-link" href="videos.html">Videolar</a></li>
             <li class="nav-item"><a class="nav-link" href="announcements.html">Duyurular</a></li>
             <li class="nav-item"><a class="nav-link" href="meetings.html">Toplantılar</a></li>
             <li class="nav-item"><a class="nav-link" href="contact.html">İletişim</a></li>
@@ -55,29 +56,33 @@
           </ol>
         </nav>
         <header class="mb-4">
-          <h1 class="h2 hp3-section-title mb-2">Proje fotoğrafları ve videolar</h1>
+          <h1 class="h2 hp3-section-title mb-2">Proje fotoğrafları</h1>
           <p class="text-secondary mb-2">Küçük resme dokunun; tam görüntü açılır. Adresleri <code>assets/js/gallery.js</code> içinden güncelleyin.</p>
           <p class="small text-secondary mb-0">Öğe sayısı: <strong class="hp3-gallery-count-live">0</strong></p>
         </header>
-        <div class="hp3-gallery-filters d-flex flex-wrap gap-2 mb-4" role="toolbar">
+        <div class="hp3-gallery-filters d-flex flex-wrap gap-2 mb-4" role="toolbar" aria-label="Fotoğraflar">
           <button type="button" class="btn btn-primary hp3-filter-btn active" data-filter="all" data-hp3-filter-all><span>Tümü</span></button>
           <button type="button" class="btn btn-outline-secondary hp3-filter-btn" data-filter="construction">İnşaat İlerlemesi</button>
           <button type="button" class="btn btn-outline-secondary hp3-filter-btn" data-filter="meetings">Toplantı Görselleri</button>
           <button type="button" class="btn btn-outline-secondary hp3-filter-btn" data-filter="documents">Resmi Belgeler</button>
           <button type="button" class="btn btn-outline-secondary hp3-filter-btn" data-filter="drone">Drone Görselleri</button>
-          <button type="button" class="btn btn-outline-secondary hp3-filter-btn" data-filter="videos">Videolar</button>
         </div>
         <div id="hp3-gallery-root" class="row g-4" aria-live="polite"></div>
       </div>
     </main>
     <footer class="hp3-footer hp3-footer-simple pt-4 pb-4 mt-auto" role="contentinfo">
       <div class="container py-3">
-        <p class="small hp3-footer-notice mb-0">Bu site yalnızca Hayat Park 3 maliklerine genel bilgi sunar; resmi tebligat veya bağlayıcı belgelerin yerini tutmaz; hukuki veya mali tavsiye değildir.</p>
+        <div class="hp3-footer-purpose">
+          <p class="small hp3-footer-notice mb-3 mb-md-0">Bu web sitesi, HayatPark AVM mağdurları ve mal sahiplerinin iletişim kurabilmesi, soru ve taleplerini iletebilmesi amacıyla hazırlanmıştır. Hiçbir ticari amaç gütmemektedir.</p>
+          <p class="small hp3-footer-notice mb-0">AVM'nin geleceğini konuşmak, tartışmak ve mal sahipleri olarak iletişim kurabilmek amacıyla tamamen bağımsız şekilde oluşturulmuştur. Projenin son durumuna ait detaylı fotoğraflar, videolar, toplantı notları ile soru-cevap içerikleri üzerinden mağdur olmuş mal sahiplerini bilgilendirmeyi hedeflemektedir.</p>
+        </div>
         <div class="d-flex flex-column flex-md-row align-items-center justify-content-between gap-2 pt-3 mt-3 border-top border-white border-opacity-25">
           <nav class="hp3-footer-nav flex-wrap justify-content-center justify-content-md-start" aria-label="Alt bilgi menüsü">
             <a href="index.html">Ana Sayfa</a>
             <span class="text-white-50 d-none d-sm-inline">&nbsp;·&nbsp;</span>
-            <a href="gallery.html">Fotoğraflar</a>
+            <a href="photos.html">Fotoğraflar</a>
+            <span class="text-white-50 d-none d-sm-inline">&nbsp;·&nbsp;</span>
+            <a href="videos.html">Videolar</a>
             <span class="text-white-50 d-none d-sm-inline">&nbsp;·&nbsp;</span>
             <a href="announcements.html">Duyurular</a>
             <span class="text-white-50 d-none d-sm-inline">&nbsp;·&nbsp;</span>

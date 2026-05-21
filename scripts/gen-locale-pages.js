@@ -1,5 +1,5 @@
 /**
- * One-off generator for tr/ar/fa inner pages (gallery, contact, announcements, meetings).
+ * One-off generator for tr/ar/fa inner pages (photos, videos, contact, announcements, meetings).
  * Run: node scripts/gen-locale-pages.js
  */
 const fs = require("fs");
@@ -7,23 +7,54 @@ const path = require("path");
 
 const root = path.join(__dirname, "..");
 
-/** One short legal notice per locale (same meaning). Shown once per page — no multi-column repeat. */
-const FOOTER_NOTICE = {
-  tr:
-    "Bu site yalnızca Hayat Park 3 maliklerine genel bilgi sunar; resmi tebligat veya bağlayıcı belgelerin yerini tutmaz; hukuki veya mali tavsiye değildir.",
-  ar: "يوفّر هذا الموقع معلومات عامة لملاك مشروع حياة بارك 3 فقط، ولا يحلّ محل الإخطارات الرسمية أو الوثائق الملزمة، وليس استشارة قانونية أو مالية.",
-  fa: "این وب‌سایت صرفاً برای اطلاع‌رسانی عمومی مالکان حیات پارک ۳ است؛ جایگزین ابلاغ رسمی یا اسناد لازم‌الاجرا نیست و مشاورهٔ حقوقی یا مالی محسوب نمی‌شود.",
+/** Single Google Form embed — same form on every locale contact page. */
+const GOOGLE_FORM_IFRAME =
+  '<iframe src="https://docs.google.com/forms/d/e/1FAIpQLSd-55G298FA8Cd-a4lcKoPI819dg6j_RJKVE_rI_L3l1ASQ4Q/viewform?embedded=true" width="640" height="3213" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>';
+
+/** Site purpose copy — index highlight + footer on every page (per locale). */
+const SITE_PURPOSE = {
+  tr: {
+    kicker: "Bağımsız bilgilendirme",
+    title: "Bu sitenin amacı",
+    p1: "Bu web sitesi, HayatPark AVM mağdurları ve mal sahiplerinin iletişim kurabilmesi, soru ve taleplerini iletebilmesi amacıyla hazırlanmıştır. Hiçbir ticari amaç gütmemektedir.",
+    p2: "AVM'nin geleceğini konuşmak, tartışmak ve mal sahipleri olarak iletişim kurabilmek amacıyla tamamen bağımsız şekilde oluşturulmuştur. Projenin son durumuna ait detaylı fotoğraflar, videolar, toplantı notları ile soru-cevap içerikleri üzerinden mağdur olmuş mal sahiplerini bilgilendirmeyi hedeflemektedir.",
+  },
+  en: {
+    kicker: "Independent information",
+    title: "Purpose of this site",
+    p1: "This website has been created to enable victims and property owners of HayatPark Shopping Mall to communicate, ask questions, and submit requests. It has no commercial purpose.",
+    p2: "It was created entirely independently to discuss and debate the future of the shopping mall and to facilitate communication among property owners. It aims to inform affected property owners through detailed photos, videos, meeting notes, and question-and-answer content regarding the current status of the project.",
+  },
+  ar: {
+    kicker: "معلومات مستقلة",
+    title: "غرض هذا الموقع",
+    p1: "تم إنشاء هذا الموقع الإلكتروني لتمكين ضحايا ومالكي العقارات في مركز حياة بارك التجاري من التواصل وطرح الأسئلة وتقديم الطلبات. وهو موقع غير ربحي.",
+    p2: "وقد أُنشئ الموقع بشكل مستقل تمامًا لمناقشة مستقبل المركز التجاري وتيسير التواصل بين مالكي العقارات. ويهدف إلى إطلاع مالكي العقارات المتضررين على الوضع الراهن للمشروع من خلال صور ومقاطع فيديو مفصلة، ومحاضر اجتماعات، ومحتوى يتضمن أسئلة وأجوبة.",
+  },
+  fa: {
+    kicker: "اطلاع‌رسانی مستقل",
+    title: "هدف این وب‌سایت",
+    p1: "این وب‌سایت به منظور فراهم کردن امکان ارتباط، پرسیدن سوال و ارسال درخواست توسط قربانیان و مالکان مرکز خرید حیات‌پارک ایجاد شده است. این وب‌سایت هیچ هدف تجاری ندارد.",
+    p2: "این وب‌سایت کاملاً مستقل و برای بحث و گفتگو در مورد آینده مرکز خرید و تسهیل ارتباط بین مالکان ایجاد شده است. هدف آن اطلاع‌رسانی به مالکان املاک آسیب‌دیده از طریق عکس‌ها، ویدیوها، یادداشت‌های جلسات و محتوای پرسش و پاسخ در مورد وضعیت فعلی پروژه است.",
+  },
 };
 
 function footerInner(locale) {
   const x = L[locale];
-  const notice = FOOTER_NOTICE[locale];
-  return `        <p class="small hp3-footer-notice mb-0">${notice}</p>
+  const purpose = SITE_PURPOSE[locale];
+  const rtl = locale === "ar" || locale === "fa";
+  const align = rtl ? " text-lg-end" : "";
+  const navAlign = rtl ? "justify-content-md-end" : "justify-content-md-start";
+  const copyAlign = rtl ? "text-md-start" : "text-md-end";
+  return `        <div class="hp3-footer-purpose${align}">
+          <p class="small hp3-footer-notice mb-3 mb-md-0">${purpose.p1}</p>
+          <p class="small hp3-footer-notice mb-0">${purpose.p2}</p>
+        </div>
         <div class="d-flex flex-column flex-md-row align-items-center justify-content-between gap-2 pt-3 mt-3 border-top border-white border-opacity-25">
-          <nav class="hp3-footer-nav flex-wrap justify-content-center justify-content-md-start" aria-label="${x.navLabel}">
+          <nav class="hp3-footer-nav flex-wrap justify-content-center ${navAlign}" aria-label="${x.navLabel}">
 ${x.footerLinks}
           </nav>
-          <p class="small hp3-muted-link mb-0 text-center text-md-end">© <span id="footer-year">2026</span> Hayat Park 3 AVM</p>
+          <p class="small hp3-muted-link mb-0 text-center ${copyAlign}">© <span id="footer-year">2026</span> Hayat Park 3 AVM</p>
         </div>`;
 }
 
@@ -35,13 +66,16 @@ const L = {
     navToggle: "Menüyü aç/kapat",
     home: "Ana Sayfa",
     photos: "Fotoğraflar",
+    videos: "Videolar",
     ann: "Duyurular",
     mtg: "Toplantılar",
     contact: "İletişim",
     langLabel: "Türkçe",
     footerLinks: `            <a href="index.html">Ana Sayfa</a>
             <span class="text-white-50 d-none d-sm-inline">&nbsp;·&nbsp;</span>
-            <a href="gallery.html">Fotoğraflar</a>
+            <a href="photos.html">Fotoğraflar</a>
+            <span class="text-white-50 d-none d-sm-inline">&nbsp;·&nbsp;</span>
+            <a href="videos.html">Videolar</a>
             <span class="text-white-50 d-none d-sm-inline">&nbsp;·&nbsp;</span>
             <a href="announcements.html">Duyurular</a>
             <span class="text-white-50 d-none d-sm-inline">&nbsp;·&nbsp;</span>
@@ -56,13 +90,16 @@ const L = {
     navToggle: "فتح القائمة",
     home: "الرئيسية",
     photos: "الصور",
+    videos: "مقاطع فيديو",
     ann: "الإعلانات",
     mtg: "الاجتماعات",
     contact: "اتصل بنا",
     langLabel: "العربية",
     footerLinks: `            <a href="index.html">الرئيسية</a>
             <span class="text-white-50 d-none d-sm-inline">&nbsp;·&nbsp;</span>
-            <a href="gallery.html">الصور</a>
+            <a href="photos.html">الصور</a>
+            <span class="text-white-50 d-none d-sm-inline">&nbsp;·&nbsp;</span>
+            <a href="videos.html">مقاطع فيديو</a>
             <span class="text-white-50 d-none d-sm-inline">&nbsp;·&nbsp;</span>
             <a href="announcements.html">الإعلانات</a>
             <span class="text-white-50 d-none d-sm-inline">&nbsp;·&nbsp;</span>
@@ -77,13 +114,16 @@ const L = {
     navToggle: "بازکردن فهرست",
     home: "خانه",
     photos: "تصاویر",
+    videos: "ویدئوها",
     ann: "اطلاعیه‌ها",
     mtg: "جلسات",
     contact: "تماس",
     langLabel: "فارسی",
     footerLinks: `            <a href="index.html">خانه</a>
             <span class="text-white-50 d-none d-sm-inline">&nbsp;·&nbsp;</span>
-            <a href="gallery.html">تصاویر</a>
+            <a href="photos.html">تصاویر</a>
+            <span class="text-white-50 d-none d-sm-inline">&nbsp;·&nbsp;</span>
+            <a href="videos.html">ویدئوها</a>
             <span class="text-white-50 d-none d-sm-inline">&nbsp;·&nbsp;</span>
             <a href="announcements.html">اطلاعیه‌ها</a>
             <span class="text-white-50 d-none d-sm-inline">&nbsp;·&nbsp;</span>
@@ -133,7 +173,8 @@ function nav(locale, activePage) {
         <div class="collapse navbar-collapse" id="hp3Nav">
           <ul class="${ulCls.trim()}">
 ${link("home", "index.html", x.home)}
-${link("gallery", "gallery.html", x.photos)}
+${link("photos", "photos.html", x.photos)}
+${link("videos", "videos.html", x.videos)}
 ${link("ann", "announcements.html", x.ann)}
 ${link("mtg", "meetings.html", x.mtg)}
 ${link("contact", "contact.html", x.contact)}
@@ -191,13 +232,13 @@ const GL_CSS = '<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glight
 const GL_JS =
   '    <script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js" defer></script>\n    <script src="../assets/js/gallery.js" defer></script>';
 
-const filLabels = {
-  tr: ["Tümü", "İnşaat İlerlemesi", "Toplantı Görselleri", "Resmi Belgeler", "Drone Görselleri", "Videolar"],
-  ar: ["الكل", "تقدم الإنشاءات", "صور الاجتماعات", "وثائق رسمية", "صور بطائرة مسيّرة", "مقاطع فيديو"],
-  fa: ["همه", "پیشرفت ساخت", "تصاویر جلسات", "اسناد رسمی", "تصاویر پهپادی", "ویدئوها"],
+const photoFilLabels = {
+  tr: ["Tümü", "İnşaat İlerlemesi", "Toplantı Görselleri", "Resmi Belgeler", "Drone Görselleri"],
+  ar: ["الكل", "تقدم الإنشاءات", "صور الاجتماعات", "وثائق رسمية", "صور بطائرة مسيّرة"],
+  fa: ["همه", "پیشرفت ساخت", "تصاویر جلسات", "اسناد رسمی", "تصاویر پهپادی"],
 };
 
-function galleryPage(locale) {
+function photosPage(locale) {
   const rtl = locale === "ar" || locale === "fa";
   const x = L[locale];
   const titles = {
@@ -206,14 +247,14 @@ function galleryPage(locale) {
     fa: "تصاویر — حیات پارک ۳",
   };
   const descs = {
-    tr: "Hayat Park 3 fotoğraf ve video arşivi — GLightbox",
-    ar: "أرشيف صور ومقاطع مشروع حياة بارك 3",
-    fa: "آرشیو تصاویر و ویدئوی پروژهٔ حیات پارک ۳",
+    tr: "Hayat Park 3 proje fotoğraf arşivi — GLightbox",
+    ar: "أرشيف صور مشروع حياة بارك 3",
+    fa: "آرشیو تصاویر پروژهٔ حیات پارک ۳",
   };
   const h1s = {
-    tr: "Proje fotoğrafları ve videolar",
-    ar: "صور ومقاطع المشروع",
-    fa: "تصاویر و ویدئوهای پروژه",
+    tr: "Proje fotoğrafları",
+    ar: "صور المشروع",
+    fa: "تصاویر پروژه",
   };
   const lead = {
     tr: 'Küçük resme dokunun; tam görüntü açılır. Adresleri <code>assets/js/gallery.js</code> içinden güncelleyin.',
@@ -222,13 +263,13 @@ function galleryPage(locale) {
   };
   const cnt = { tr: "Öğe sayısı", ar: "عدد العناصر", fa: "تعداد موارد" };
   const bcAria = { tr: "Sayfa konumu", ar: "مسار التصفح", fa: "مسیر صفحه" };
-  const [f0, f1, f2, f3, f4, f5] = filLabels[locale];
+  const [f0, f1, f2, f3, f4] = photoFilLabels[locale];
   const bs = rtl ? "bootstrap.rtl.min.css" : "bootstrap.min.css";
   return `<!DOCTYPE html>
 <html lang="${locale}" dir="${rtl ? "rtl" : "ltr"}">
 ${head(locale, titles[locale], descs[locale], GL_CSS, bs)}
-  <body class="hp3-body d-flex flex-column min-vh-100">
-${nav(locale, "gallery")}
+  <body class="hp3-body d-flex flex-column min-vh-100" data-hp3-gallery-mode="photos">
+${nav(locale, "photos")}
     <main id="main" class="flex-grow-1 py-4 py-lg-5">
       <div class="container">
         <nav class="hp3-breadcrumb-wrap mb-3" aria-label="${bcAria[locale]}">
@@ -242,14 +283,65 @@ ${nav(locale, "gallery")}
           <p class="text-secondary mb-2">${lead[locale]}</p>
           <p class="small text-secondary mb-0">${cnt[locale]}: <strong class="hp3-gallery-count-live">0</strong></p>
         </header>
-        <div class="hp3-gallery-filters d-flex flex-wrap gap-2 mb-4" role="toolbar">
+        <div class="hp3-gallery-filters d-flex flex-wrap gap-2 mb-4" role="toolbar" aria-label="${x.photos}">
           <button type="button" class="btn btn-primary hp3-filter-btn active" data-filter="all" data-hp3-filter-all><span>${f0}</span></button>
           <button type="button" class="btn btn-outline-secondary hp3-filter-btn" data-filter="construction">${f1}</button>
           <button type="button" class="btn btn-outline-secondary hp3-filter-btn" data-filter="meetings">${f2}</button>
           <button type="button" class="btn btn-outline-secondary hp3-filter-btn" data-filter="documents">${f3}</button>
           <button type="button" class="btn btn-outline-secondary hp3-filter-btn" data-filter="drone">${f4}</button>
-          <button type="button" class="btn btn-outline-secondary hp3-filter-btn" data-filter="videos">${f5}</button>
         </div>
+        <div id="hp3-gallery-root" class="row g-4" aria-live="polite"></div>
+      </div>
+    </main>
+${footer(locale, GL_JS)}
+  </body>
+</html>`;
+}
+
+function videosPage(locale) {
+  const rtl = locale === "ar" || locale === "fa";
+  const x = L[locale];
+  const titles = {
+    tr: "Videolar — Hayat Park 3 AVM",
+    ar: "مقاطع فيديو — Hayat Park 3",
+    fa: "ویدئوها — حیات پارک ۳",
+  };
+  const descs = {
+    tr: "Hayat Park 3 proje video arşivi — GLightbox",
+    ar: "أرشيف مقاطع فيديو مشروع حياة بارك 3",
+    fa: "آرشیو ویدئوهای پروژهٔ حیات پارک ۳",
+  };
+  const h1s = {
+    tr: "Proje videoları",
+    ar: "مقاطع فيديو المشروع",
+    fa: "ویدئوهای پروژه",
+  };
+  const lead = {
+    tr: "Küçük resme dokunun; video oynatıcı açılır. YouTube bağlantılarını <code>assets/js/gallery.js</code> içinden güncelleyin.",
+    ar: "اضغط المصغّرة لتشغيل الفيديو. استبدل روابط يوتيوب في gallery.js.",
+    fa: "برای پخش روی بندانگشتی بزنید. لینک‌های یوتوب را در gallery.js به‌روز کنید.",
+  };
+  const cnt = { tr: "Öğe sayısı", ar: "عدد العناصر", fa: "تعداد موارد" };
+  const bcAria = { tr: "Sayfa konumu", ar: "مسار التصفح", fa: "مسیر صفحه" };
+  const bs = rtl ? "bootstrap.rtl.min.css" : "bootstrap.min.css";
+  return `<!DOCTYPE html>
+<html lang="${locale}" dir="${rtl ? "rtl" : "ltr"}">
+${head(locale, titles[locale], descs[locale], GL_CSS, bs)}
+  <body class="hp3-body d-flex flex-column min-vh-100" data-hp3-gallery-mode="videos">
+${nav(locale, "videos")}
+    <main id="main" class="flex-grow-1 py-4 py-lg-5">
+      <div class="container">
+        <nav class="hp3-breadcrumb-wrap mb-3" aria-label="${bcAria[locale]}">
+          <ol class="breadcrumb hp3-breadcrumb mb-0">
+            <li class="breadcrumb-item"><a href="index.html">${x.home}</a></li>
+            <li class="breadcrumb-item active" aria-current="page">${x.videos}</li>
+          </ol>
+        </nav>
+        <header class="mb-4">
+          <h1 class="h2 hp3-section-title mb-2">${h1s[locale]}</h1>
+          <p class="text-secondary mb-2">${lead[locale]}</p>
+          <p class="small text-secondary mb-0">${cnt[locale]}: <strong class="hp3-gallery-count-live">0</strong></p>
+        </header>
         <div id="hp3-gallery-root" class="row g-4" aria-live="polite"></div>
       </div>
     </main>
@@ -273,9 +365,9 @@ function contactPage(locale) {
   };
   const h1 = { tr: "İletişim", ar: "اتصل بنا", fa: "تماس" };
   const sub = {
-    tr: "Mesajınızı aşağıdaki formdan iletin. Yayınlanmış Google Form adresini iframe src olarak yapıştırın (<code>…/viewform?embedded=true</code>).",
-    ar: "أرسل رسالتك عبر النموذج أدناه. استبدل عنوان iframe برابط نموذج Google المنشور.",
-    fa: "پیام خود را از طریق فرم زیر بفرستید. نشانی embed فرم Google را در ویژگی src قرار دهید.",
+    tr: "Sorularınızı ve taleplerinizi aşağıdaki formdan iletebilirsiniz.",
+    ar: "أرسل أسئلتك وطلباتك عبر النموذج أدناه.",
+    fa: "سوالات و درخواست‌های خود را از طریق فرم زیر ارسال کنید.",
   };
   const bs = rtl ? "bootstrap.rtl.min.css" : "bootstrap.min.css";
   const skipPos = rtl ? "end-0" : "start-0";
@@ -300,7 +392,7 @@ ${nav(locale, "contact")}
               <p class="text-secondary mb-0">${sub[locale]}</p>
             </header>
             <div class="hp3-form-embed">
-              <iframe title="${h1[locale]}" src="about:blank" loading="lazy"></iframe>
+              ${GOOGLE_FORM_IFRAME}
             </div>
           </div>
         </div>
@@ -635,10 +727,11 @@ ${footer(locale, "")}
 
 ["tr", "ar", "fa"].forEach((loc) => {
   const dir = path.join(root, loc);
-  fs.writeFileSync(path.join(dir, "gallery.html"), galleryPage(loc));
+  fs.writeFileSync(path.join(dir, "photos.html"), photosPage(loc));
+  fs.writeFileSync(path.join(dir, "videos.html"), videosPage(loc));
   fs.writeFileSync(path.join(dir, "contact.html"), contactPage(loc));
   fs.writeFileSync(path.join(dir, "announcements.html"), announcementsPage(loc));
   fs.writeFileSync(path.join(dir, "meetings.html"), meetingsPage(loc));
 });
 
-console.log("Wrote tr/ar/fa gallery, contact, announcements, meetings.");
+console.log("Wrote tr/ar/fa photos, videos, contact, announcements, meetings.");

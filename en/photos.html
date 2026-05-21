@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-    <meta name="description" content="Hayat Park 3 — project photos and videos with filters and GLightbox viewer." />
+    <meta name="description" content="Hayat Park 3 — project photos with category filters and GLightbox viewer." />
     <meta name="theme-color" content="#0a1b2f" />
     <meta name="mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -24,7 +24,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" />
     <link rel="stylesheet" href="../assets/css/style.css" />
   </head>
-  <body class="hp3-body d-flex flex-column min-vh-100">
+  <body class="hp3-body d-flex flex-column min-vh-100" data-hp3-gallery-mode="photos">
     <nav class="navbar navbar-expand-lg navbar-light hp3-navbar sticky-top">
       <div class="container">
         <a class="navbar-brand" href="index.html">
@@ -37,7 +37,8 @@
         <div class="collapse navbar-collapse" id="hp3Nav">
           <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-lg-center">
             <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
-            <li class="nav-item"><a class="nav-link active" aria-current="page" href="gallery.html">Photos</a></li>
+            <li class="nav-item"><a class="nav-link active" aria-current="page" href="photos.html">Photos</a></li>
+            <li class="nav-item"><a class="nav-link" href="videos.html">Videos</a></li>
             <li class="nav-item"><a class="nav-link" href="announcements.html">Announcements</a></li>
             <li class="nav-item"><a class="nav-link" href="meetings.html">Meetings</a></li>
             <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
@@ -65,18 +66,17 @@
         </nav>
 
         <header class="mb-4">
-          <h1 class="h2 hp3-section-title mb-2">Project photos &amp; videos</h1>
+          <h1 class="h2 hp3-section-title mb-2">Project photos</h1>
           <p class="text-secondary mb-2">Tap a thumbnail. Swipe inside the viewer on phones. Replace image URLs in <code>assets/js/gallery.js</code> when your media is ready.</p>
           <p class="small text-secondary mb-0">Items: <strong class="hp3-gallery-count-live">0</strong></p>
         </header>
 
-        <div class="hp3-gallery-filters d-flex flex-wrap gap-2 mb-4" role="toolbar" aria-label="Categories">
+        <div class="hp3-gallery-filters d-flex flex-wrap gap-2 mb-4" role="toolbar" aria-label="Photo categories">
           <button type="button" class="btn btn-primary hp3-filter-btn active" data-filter="all" data-hp3-filter-all><span>All</span></button>
           <button type="button" class="btn btn-outline-secondary hp3-filter-btn" data-filter="construction">Construction Progress</button>
           <button type="button" class="btn btn-outline-secondary hp3-filter-btn" data-filter="meetings">Meeting Photos</button>
           <button type="button" class="btn btn-outline-secondary hp3-filter-btn" data-filter="documents">Official Documents</button>
           <button type="button" class="btn btn-outline-secondary hp3-filter-btn" data-filter="drone">Drone Images</button>
-          <button type="button" class="btn btn-outline-secondary hp3-filter-btn" data-filter="videos">Videos</button>
         </div>
 
         <div id="hp3-gallery-root" class="row g-4" aria-live="polite"></div>
@@ -85,14 +85,21 @@
 
     <footer class="hp3-footer hp3-footer-simple pt-4 pb-4 mt-auto" role="contentinfo">
       <div class="container py-3">
-        <p class="small hp3-footer-notice mb-0">
-          This site shares general information for Hayat Park 3 owners only. It does not replace official notices or binding documents and is not legal or financial advice.
-        </p>
+        <div class="hp3-footer-purpose">
+          <p class="small hp3-footer-notice mb-3 mb-md-0">
+            This website has been created to enable victims and property owners of HayatPark Shopping Mall to communicate, ask questions, and submit requests. It has no commercial purpose.
+          </p>
+          <p class="small hp3-footer-notice mb-0">
+            It was created entirely independently to discuss and debate the future of the shopping mall and to facilitate communication among property owners. It aims to inform affected property owners through detailed photos, videos, meeting notes, and question-and-answer content regarding the current status of the project.
+          </p>
+        </div>
         <div class="d-flex flex-column flex-md-row align-items-center justify-content-between gap-2 pt-3 mt-3 border-top border-white border-opacity-25">
           <nav class="hp3-footer-nav flex-wrap justify-content-center justify-content-md-start" aria-label="Footer navigation">
             <a href="index.html">Home</a>
             <span class="text-white-50 d-none d-sm-inline">&nbsp;·&nbsp;</span>
-            <a href="gallery.html">Photos</a>
+            <a href="photos.html">Photos</a>
+            <span class="text-white-50 d-none d-sm-inline">&nbsp;·&nbsp;</span>
+            <a href="videos.html">Videos</a>
             <span class="text-white-50 d-none d-sm-inline">&nbsp;·&nbsp;</span>
             <a href="announcements.html">Announcements</a>
             <span class="text-white-50 d-none d-sm-inline">&nbsp;·&nbsp;</span>

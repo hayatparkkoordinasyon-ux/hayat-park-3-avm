@@ -5,13 +5,7 @@
 (function ($) {
   "use strict";
 
-  var CAT_ORDER = [
-    "construction",
-    "meetings",
-    "documents",
-    "drone",
-    "videos",
-  ];
+  var PHOTO_CAT_ORDER = ["construction", "meetings", "documents", "drone"];
 
   var YT_IDS = [
     "btMdybxPsLc",
@@ -196,8 +190,17 @@
     return l;
   }
 
+  function galleryMode() {
+    var mode = (
+      $("body").attr("data-hp3-gallery-mode") ||
+      $("#hp3-gallery-root").attr("data-hp3-gallery-mode") ||
+      "photos"
+    ).toString();
+    return mode === "videos" ? "videos" : "photos";
+  }
+
   function catForImageIndex(idx) {
-    return CAT_ORDER[idx % CAT_ORDER.length];
+    return PHOTO_CAT_ORDER[idx % PHOTO_CAT_ORDER.length];
   }
 
   function escapeAttr(s) {
@@ -258,16 +261,23 @@
 
   function renderItems(lang) {
     var L = LEX[lang];
+    var mode = galleryMode();
     var $grid = $("#hp3-gallery-root");
     if (!$grid.length) return;
 
-    // Localize buttons
-    $("[data-hp3-filter-all]").each(function () {
-      $(this).find("span").text(L.filters.all);
-    });
-    CAT_ORDER.forEach(function (cat) {
-      $(".hp3-filter-btn[data-filter='" + cat + "']").text(L.filters[cat]);
-    });
+    var $filters = $(".hp3-gallery-filters");
+    if ($filters.length) {
+      $filters.toggle(mode === "photos");
+    }
+
+    if (mode === "photos") {
+      $("[data-hp3-filter-all]").each(function () {
+        $(this).find("span").text(L.filters.all);
+      });
+      PHOTO_CAT_ORDER.forEach(function (cat) {
+        $(".hp3-filter-btn[data-filter='" + cat + "']").text(L.filters[cat]);
+      });
+    }
 
     var html = "";
 
@@ -350,35 +360,45 @@
       );
     }
 
-    // 103 images keeps total media > 105 with videos
-    for (var idx = 1; idx <= 103; idx += 1) {
-      html += imageBlock(idx, catForImageIndex(idx - 1));
-    }
-
-    var v;
-    for (v = 1; v <= 12; v += 1) {
-      html += videoBlock(v, "videos");
+    if (mode === "photos") {
+      for (var idx = 1; idx <= 103; idx += 1) {
+        html += imageBlock(idx, catForImageIndex(idx - 1));
+      }
+    } else {
+      var v;
+      for (v = 1; v <= 12; v += 1) {
+        html += videoBlock(v, "videos");
+      }
     }
 
     $grid.html(html);
 
-    $(".hp3-filter-btn.btn-primary[data-filter]").removeClass(
-      "btn-primary active",
-    );
-    $(".hp3-filter-btn.btn-outline-secondary").removeClass("btn-primary active");
-    $('.hp3-filter-btn[data-filter="all"]')
-      .addClass("btn-primary active")
-      .removeClass("btn-outline-secondary");
-    $(".gallery-item.filtered-out").removeClass("filtered-out");
-    $("a.glightbox").each(function () {
-      $(this)
-        .addClass("hp3-gallery-visible")
-        .attr("aria-hidden", "false")
-        .attr("tabindex", "0");
-    });
+    if (mode === "photos") {
+      $(".hp3-filter-btn.btn-primary[data-filter]").removeClass(
+        "btn-primary active",
+      );
+      $(".hp3-filter-btn.btn-outline-secondary").removeClass("btn-primary active");
+      $('.hp3-filter-btn[data-filter="all"]')
+        .addClass("btn-primary active")
+        .removeClass("btn-outline-secondary");
+      $(".gallery-item.filtered-out").removeClass("filtered-out");
+      $("a.glightbox").each(function () {
+        $(this)
+          .addClass("hp3-gallery-visible")
+          .attr("aria-hidden", "false")
+          .attr("tabindex", "0");
+      });
+      attachFilters();
+    } else {
+      $("a.glightbox").each(function () {
+        $(this)
+          .addClass("hp3-gallery-visible")
+          .attr("aria-hidden", "false")
+          .attr("tabindex", "0");
+      });
+    }
 
     rebuildLightbox();
-    attachFilters();
 
     $(".hp3-gallery-count-live").text(String($("#hp3-gallery-root .gallery-item").length));
   }

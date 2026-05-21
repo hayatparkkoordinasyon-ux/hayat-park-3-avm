@@ -11,6 +11,7 @@
     <title>Hayat Park 3 AVM — Malikler</title>
     <link rel="canonical" href="./index.html" />
     <link rel="manifest" href="../manifest.webmanifest" />
+    <link rel="preload" as="image" href="../images/lta-shopsforsalefromhayatpark-6.webp" type="image/webp" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -35,7 +36,8 @@
         <div class="collapse navbar-collapse" id="hp3Nav">
           <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-lg-center">
             <li class="nav-item"><a class="nav-link active" aria-current="page" href="index.html">Ana Sayfa</a></li>
-            <li class="nav-item"><a class="nav-link" href="gallery.html">Fotoğraflar</a></li>
+            <li class="nav-item"><a class="nav-link" href="photos.html">Fotoğraflar</a></li>
+            <li class="nav-item"><a class="nav-link" href="videos.html">Videolar</a></li>
             <li class="nav-item"><a class="nav-link" href="announcements.html">Duyurular</a></li>
             <li class="nav-item"><a class="nav-link" href="meetings.html">Toplantılar</a></li>
             <li class="nav-item"><a class="nav-link" href="contact.html">İletişim</a></li>
@@ -56,9 +58,10 @@
     <main id="main" class="flex-grow-1">
       <section class="hp3-hero hp3-hero-photo">
         <div class="container">
-          <div class="hp3-hero-inner py-lg-2">
-            <h1 class="display-5 hp3-display text-white mb-3">Malikler için net bilgi</h1>
-            <p class="lead text-white-50 mb-0">Proje fotoğrafları, duyurular, toplantı özetleri ve tek iletişim formu tek yerde.</p>
+          <div class="hp3-hero-inner hp3-hero-inner-statement py-lg-2">
+            <h1 class="hp3-hero-statement mb-0">
+              Bu web sitesi, HayatPark AVM mağdurları ve mal sahiplerinin iletişim kurabilmesi, soru ve taleplerini iletebilmesi amacıyla hazırlanmıştır. Hiçbir ticari amaç gütmemektedir.
+            </h1>
           </div>
           <div class="row g-3 mt-4">
             <div class="col-6 col-md-4 col-lg">
@@ -74,8 +77,17 @@
               <article class="card hp3-card hp3-quick-card border-0 h-100 bg-white bg-opacity-10 border border-light border-opacity-25">
                 <div class="card-body d-flex flex-column">
                   <h2 class="h6 text-white mb-2">Fotoğraflar</h2>
-                  <p class="small text-white-50 flex-grow-1 mb-3">İlerleme görselleri ve videolar.</p>
-                  <a class="btn btn-light hp3-btn-outline stretched-link mt-auto" href="gallery.html">Aç</a>
+                  <p class="small text-white-50 flex-grow-1 mb-3">İlerleme, toplantı ve drone görselleri.</p>
+                  <a class="btn btn-light hp3-btn-outline stretched-link mt-auto" href="photos.html">Aç</a>
+                </div>
+              </article>
+            </div>
+            <div class="col-6 col-md-4 col-lg">
+              <article class="card hp3-card hp3-quick-card border-0 h-100 bg-white bg-opacity-10 border border-light border-opacity-25">
+                <div class="card-body d-flex flex-column">
+                  <h2 class="h6 text-white mb-2">Videolar</h2>
+                  <p class="small text-white-50 flex-grow-1 mb-3">Proje güncellemeleri ve kayıtlı toplantılar.</p>
+                  <a class="btn btn-light hp3-btn-outline stretched-link mt-auto" href="videos.html">Aç</a>
                 </div>
               </article>
             </div>
@@ -101,12 +113,20 @@
         </div>
       </section>
 
-      <section class="py-5">
+      <section class="hp3-purpose-section py-5" aria-labelledby="hp3-purpose-title">
         <div class="container">
           <div class="row justify-content-center">
-            <div class="col-lg-8 text-center">
-              <h2 class="h4 hp3-section-title mb-3">Yalnızca bilgilendirme</h2>
-              <p class="text-secondary mb-0">Bağlayıcı hususlar için kayyım yazılarına, sözleşmelere ve mahkeme kararlarına bakınız.</p>
+            <div class="col-lg-10">
+              <article class="hp3-purpose-card">
+                <span class="hp3-purpose-kicker">Bağımsız bilgilendirme</span>
+                <h2 id="hp3-purpose-title" class="h4 hp3-section-title mb-4">Bu sitenin amacı</h2>
+                <p class="hp3-purpose-lead mb-3">
+                  Bu web sitesi, HayatPark AVM mağdurları ve mal sahiplerinin iletişim kurabilmesi, soru ve taleplerini iletebilmesi amacıyla hazırlanmıştır. Hiçbir ticari amaç gütmemektedir.
+                </p>
+                <p class="hp3-purpose-text mb-0">
+                  AVM'nin geleceğini konuşmak, tartışmak ve mal sahipleri olarak iletişim kurabilmek amacıyla tamamen bağımsız şekilde oluşturulmuştur. Projenin son durumuna ait detaylı fotoğraflar, videolar, toplantı notları ile soru-cevap içerikleri üzerinden mağdur olmuş mal sahiplerini bilgilendirmeyi hedeflemektedir.
+                </p>
+              </article>
             </div>
           </div>
         </div>
@@ -115,14 +135,21 @@
 
     <footer class="hp3-footer hp3-footer-simple pt-4 pb-4 mt-auto" role="contentinfo">
       <div class="container py-3">
-        <p class="small hp3-footer-notice mb-0">
-          Bu site yalnızca Hayat Park 3 maliklerine genel bilgi sunar; resmi tebligat veya bağlayıcı belgelerin yerini tutmaz; hukuki veya mali tavsiye değildir.
-        </p>
+        <div class="hp3-footer-purpose">
+          <p class="small hp3-footer-notice mb-3 mb-md-0">
+            Bu web sitesi, HayatPark AVM mağdurları ve mal sahiplerinin iletişim kurabilmesi, soru ve taleplerini iletebilmesi amacıyla hazırlanmıştır. Hiçbir ticari amaç gütmemektedir.
+          </p>
+          <p class="small hp3-footer-notice mb-0">
+            AVM'nin geleceğini konuşmak, tartışmak ve mal sahipleri olarak iletişim kurabilmek amacıyla tamamen bağımsız şekilde oluşturulmuştur. Projenin son durumuna ait detaylı fotoğraflar, videolar, toplantı notları ile soru-cevap içerikleri üzerinden mağdur olmuş mal sahiplerini bilgilendirmeyi hedeflemektedir.
+          </p>
+        </div>
         <div class="d-flex flex-column flex-md-row align-items-center justify-content-between gap-2 pt-3 mt-3 border-top border-white border-opacity-25">
           <nav class="hp3-footer-nav flex-wrap justify-content-center justify-content-md-start" aria-label="Alt bilgi menüsü">
             <a href="index.html">Ana Sayfa</a>
             <span class="text-white-50 d-none d-sm-inline">&nbsp;·&nbsp;</span>
-            <a href="gallery.html">Fotoğraflar</a>
+            <a href="photos.html">Fotoğraflar</a>
+            <span class="text-white-50 d-none d-sm-inline">&nbsp;·&nbsp;</span>
+            <a href="videos.html">Videolar</a>
             <span class="text-white-50 d-none d-sm-inline">&nbsp;·&nbsp;</span>
             <a href="announcements.html">Duyurular</a>
             <span class="text-white-50 d-none d-sm-inline">&nbsp;·&nbsp;</span>
