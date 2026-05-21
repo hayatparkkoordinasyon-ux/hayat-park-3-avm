@@ -480,10 +480,13 @@ html[lang="fa"] body.hp3-body {
 
 .hp3-body .btn-primary:hover,
 .hp3-body .btn-primary:focus-visible,
+.hp3-body .btn-primary:active,
 .hp3-body .btn.btn-primary:hover,
 .hp3-body .btn.btn-primary:focus-visible,
+.hp3-body .btn.btn-primary:active,
 .btn.hp3-btn-primary:hover,
-.btn.hp3-btn-primary:focus-visible {
+.btn.hp3-btn-primary:focus-visible,
+.btn.hp3-btn-primary:active {
   background: var(--hp3-btn-light-fill-hover);
   color: var(--hp3-btn-text);
   border-color: var(--hp3-btn-light-border-hover);
@@ -511,25 +514,24 @@ html[lang="fa"] body.hp3-body {
 
 .hp3-body .btn-outline-secondary:hover,
 .hp3-body .btn-outline-secondary:focus-visible,
+.hp3-body .btn-outline-secondary:active,
 .hp3-body .btn.btn-outline-secondary:hover,
 .hp3-body .btn.btn-outline-secondary:focus-visible,
+.hp3-body .btn.btn-outline-secondary:active,
 .btn.hp3-btn-outline:hover,
 .btn.hp3-btn-outline:focus-visible,
+.btn.hp3-btn-outline:active,
 .btn.btn-light.hp3-btn-outline:hover,
-.btn.btn-light.hp3-btn-outline:focus-visible {
+.btn.btn-light.hp3-btn-outline:focus-visible,
+.btn.btn-light.hp3-btn-outline:active {
   border-color: var(--hp3-btn-light-border-hover);
   color: var(--hp3-btn-text);
   background: var(--hp3-btn-light-fill-hover);
 }
 
-.hp3-body .btn-light:not(.hp3-btn-outline) {
-  background: var(--hp3-btn-light-fill);
-  color: var(--hp3-btn-text);
-  border: 1px solid var(--hp3-btn-light-border);
-}
-
 .hp3-body .btn-light:not(.hp3-btn-outline):hover,
-.hp3-body .btn-light:not(.hp3-btn-outline):focus-visible {
+.hp3-body .btn-light:not(.hp3-btn-outline):focus-visible,
+.hp3-body .btn-light:not(.hp3-btn-outline):active {
   background: var(--hp3-btn-light-fill-hover);
   color: var(--hp3-btn-text);
   border-color: var(--hp3-btn-light-border-hover);
@@ -541,6 +543,28 @@ html[lang="fa"] body.hp3-body {
 
 .btn.hp3-btn-outline:not(.btn-outline-light):not(.btn-light) {
   background: var(--hp3-btn-light-fill);
+}
+
+.hp3-body .btn-light:not(.hp3-btn-outline) {
+  background: var(--hp3-btn-light-fill);
+  color: var(--hp3-btn-text);
+  border: 1px solid var(--hp3-btn-light-border);
+}
+
+/* Bootstrap 5 btn tokens — keep yellow on tap/hover (especially mobile) */
+.hp3-body .btn {
+  --bs-btn-bg: #fff6c9;
+  --bs-btn-border-color: #e6cf6a;
+  --bs-btn-color: #0a1b2f;
+  --bs-btn-hover-bg: #ffefab;
+  --bs-btn-hover-border-color: #d4b84a;
+  --bs-btn-hover-color: #0a1b2f;
+  --bs-btn-active-bg: #ffe684;
+  --bs-btn-active-border-color: #c9a83a;
+  --bs-btn-active-color: #0a1b2f;
+  --bs-btn-disabled-bg: #fff6c9;
+  --bs-btn-disabled-border-color: #e6cf6a;
+  --bs-btn-disabled-color: #0a1b2f;
 }
 
 /* Alerts / emergencies */
@@ -855,6 +879,102 @@ html[lang="fa"] .hp3-gallery-play {
 
 .hp3-body .accordion-button:not(.collapsed) {
   box-shadow: none;
+}
+
+/* Mobile — stronger hero/card contrast + forced yellow buttons */
+@media (max-width: 991.98px) {
+  :root {
+    --hp3-hero-photo-overlay: linear-gradient(
+      155deg,
+      rgba(5, 12, 22, 0.95) 0%,
+      rgba(8, 18, 32, 0.93) 48%,
+      rgba(5, 12, 22, 0.91) 100%
+    );
+    --hp3-quick-card-bg: rgba(5, 12, 22, 0.9);
+    --hp3-quick-card-border: rgba(255, 255, 255, 0.34);
+  }
+
+  .hp3-hero.hp3-hero-photo::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: rgba(5, 12, 22, 0.44);
+    pointer-events: none;
+  }
+
+  .hp3-hero.hp3-hero-photo > .container {
+    z-index: 2;
+  }
+
+  .hp3-hero-statement {
+    background: rgba(5, 12, 22, 0.86);
+    backdrop-filter: blur(18px) saturate(140%);
+    -webkit-backdrop-filter: blur(18px) saturate(140%);
+    border-color: rgba(255, 255, 255, 0.3);
+  }
+
+  .hp3-quick-card {
+    background: var(--hp3-quick-card-bg) !important;
+    backdrop-filter: blur(20px) saturate(140%);
+    -webkit-backdrop-filter: blur(20px) saturate(140%);
+  }
+
+  .hp3-quick-card .text-white-50,
+  .hp3-quick-card .small.text-white-50 {
+    color: rgba(255, 255, 255, 0.94) !important;
+  }
+
+  .hp3-body .btn,
+  .hp3-body a.btn,
+  .hp3-body button.btn,
+  .hp3-quick-card .btn,
+  .hp3-gallery-filters .btn {
+    background: var(--hp3-btn-light-fill) !important;
+    border-color: var(--hp3-btn-light-border) !important;
+    color: var(--hp3-btn-text) !important;
+    -webkit-tap-highlight-color: rgba(255, 230, 132, 0.45);
+  }
+
+  .hp3-body .btn:hover,
+  .hp3-body .btn:focus,
+  .hp3-body .btn:focus-visible,
+  .hp3-body .btn:active,
+  .hp3-body .btn.active,
+  .hp3-body .show > .btn.dropdown-toggle {
+    background: var(--hp3-btn-light-fill-hover) !important;
+    border-color: var(--hp3-btn-light-border-hover) !important;
+    color: var(--hp3-btn-text) !important;
+  }
+}
+
+@media (max-width: 575.98px) {
+  :root {
+    --hp3-quick-card-bg: rgba(4, 10, 18, 0.93);
+  }
+
+  .hp3-hero.hp3-hero-photo::before {
+    background: rgba(4, 10, 18, 0.52);
+  }
+
+  .hp3-hero-statement {
+    background: rgba(4, 10, 18, 0.9);
+    padding: 1.15rem 1.2rem;
+  }
+
+  .hp3-quick-card {
+    backdrop-filter: blur(22px) saturate(150%);
+    -webkit-backdrop-filter: blur(22px) saturate(150%);
+  }
+}
+
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  @media (max-width: 991.98px) {
+    .hp3-quick-card,
+    .hp3-hero-statement {
+      background: rgba(4, 10, 18, 0.94) !important;
+    }
+  }
 }
 
 /* Reduced motion */
