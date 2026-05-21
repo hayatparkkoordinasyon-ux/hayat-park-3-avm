@@ -1,0 +1,66 @@
+/**
+ * Supplemental RTL rules for Arabic and Persian locales.
+ * Arabic/Persian pages load Bootstrap RTL; this file aligns custom portal styles.
+ */
+
+html[dir="rtl"] .navbar.hp3-navbar .navbar-brand {
+  text-align: end;
+}
+
+html[dir="rtl"] .hp3-gallery-filters .btn.me-2 {
+  margin-inline-end: 0 !important;
+  margin-inline-start: 0.35rem !important;
+}
+
+html[dir="rtl"] .text-md-end {
+  text-align: start !important;
+}
+
+@media (min-width: 768px) {
+  html[dir="rtl"] .text-md-end {
+    text-align: start !important;
+  }
+}
+
+html[dir="rtl"] .timeline-line {
+  border-inline-start: 2px solid var(--hp3-border) !important;
+  border-inline-end: 0 !important;
+}
+
+html[dir="rtl"] ul.list-unstyled .d-flex.align-items-start {
+  flex-direction: row-reverse !important;
+}
+
+html[dir="rtl"] figure.text-center {
+  text-align: center;
+}
+
+html[dir="rtl"] .breadcrumb-item + .breadcrumb-item::before {
+  float: inline-end;
+}
+
+html[dir="rtl"] .hp3-footer-simple .hp3-footer-notice {
+  margin-inline-start: auto;
+}
+
+html[dir="rtl"] .hp3-footer-nav {
+  justify-content: flex-end;
+}
+
+/* Ensure form controls align logically in RTL */
+html[dir="rtl"] textarea,
+html[dir="rtl"] input[type="email"],
+html[dir="rtl"] input[type="text"],
+html[dir="rtl"] select {
+  text-align: inherit;
+}
+
+html[dir="rtl"] .dropdown-menu[data-bs-popper] {
+  right: auto;
+  left: 0;
+}
+
+html[dir="rtl"] body.hp3-body .dropdown-menu-end {
+  right: auto;
+  left: 0 !important;
+}

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="tr" dir="ltr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="description" content="Hayat Park 3 fotoğraf ve video arşivi — GLightbox" />
+    <meta name="theme-color" content="#0a1b2f" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <title>Fotoğraflar — Hayat Park 3 AVM</title>
+    <link rel="manifest" href="../manifest.webmanifest" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;600;700&amp;family=Noto+Sans+Arabic:wght@400;600;700&amp;family=Vazirmatn:wght@400;600;700&amp;display=swap" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" />
+    <link rel="stylesheet" href="../assets/css/style.css" />
+  </head>
+  <body class="hp3-body d-flex flex-column min-vh-100">
+    <nav class="navbar navbar-expand-lg navbar-light hp3-navbar sticky-top">
+      <div class="container">
+        <a class="navbar-brand" href="index.html">
+          Hayat Park&nbsp;3&nbsp;AVM
+          <span class="hp3-brand-sub text-uppercase">Malikler · Bilgilendirme</span>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#hp3Nav" aria-controls="hp3Nav" aria-expanded="false" aria-label="Menüyü aç/kapat">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="hp3Nav">
+          <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-lg-center">
+            <li class="nav-item"><a class="nav-link" href="index.html">Ana Sayfa</a></li>
+            <li class="nav-item"><a class="nav-link active" aria-current="page" href="gallery.html">Fotoğraflar</a></li>
+            <li class="nav-item"><a class="nav-link" href="announcements.html">Duyurular</a></li>
+            <li class="nav-item"><a class="nav-link" href="meetings.html">Toplantılar</a></li>
+            <li class="nav-item"><a class="nav-link" href="contact.html">İletişim</a></li>
+            <li class="nav-item dropdown hp3-lang ms-lg-2">
+              <button class="btn btn-outline-secondary btn-sm dropdown-toggle" id="langMenu" type="button" data-bs-toggle="dropdown" aria-expanded="false">Türkçe</button>
+              <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="langMenu">
+                <li><a class="dropdown-item fw-semibold active" aria-current="true" href="#" data-hp3-lang-switch="tr">Türkçe</a></li>
+                <li><a class="dropdown-item" href="#" data-hp3-lang-switch="en">English</a></li>
+                <li><a class="dropdown-item" href="#" dir="rtl" data-hp3-lang-switch="ar">العربية</a></li>
+                <li><a class="dropdown-item" href="#" dir="rtl" data-hp3-lang-switch="fa">فارسی</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <main id="main" class="flex-grow-1 py-4 py-lg-5">
+      <div class="container">
+        <nav class="hp3-breadcrumb-wrap mb-3" aria-label="Sayfa konumu">
+          <ol class="breadcrumb hp3-breadcrumb mb-0">
+            <li class="breadcrumb-item"><a href="index.html">Ana Sayfa</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Fotoğraflar</li>
+          </ol>
+        </nav>
+        <header class="mb-4">
+          <h1 class="h2 hp3-section-title mb-2">Proje fotoğrafları ve videolar</h1>
+          <p class="text-secondary mb-2">Küçük resme dokunun; tam görüntü açılır. Adresleri <code>assets/js/gallery.js</code> içinden güncelleyin.</p>
+          <p class="small text-secondary mb-0">Öğe sayısı: <strong class="hp3-gallery-count-live">0</strong></p>
+        </header>
+        <div class="hp3-gallery-filters d-flex flex-wrap gap-2 mb-4" role="toolbar">
+          <button type="button" class="btn btn-primary hp3-filter-btn active" data-filter="all" data-hp3-filter-all><span>Tümü</span></button>
+          <button type="button" class="btn btn-outline-secondary hp3-filter-btn" data-filter="construction">İnşaat İlerlemesi</button>
+          <button type="button" class="btn btn-outline-secondary hp3-filter-btn" data-filter="meetings">Toplantı Görselleri</button>
+          <button type="button" class="btn btn-outline-secondary hp3-filter-btn" data-filter="documents">Resmi Belgeler</button>
+          <button type="button" class="btn btn-outline-secondary hp3-filter-btn" data-filter="drone">Drone Görselleri</button>
+          <button type="button" class="btn btn-outline-secondary hp3-filter-btn" data-filter="videos">Videolar</button>
+        </div>
+        <div id="hp3-gallery-root" class="row g-4" aria-live="polite"></div>
+      </div>
+    </main>
+    <footer class="hp3-footer hp3-footer-simple pt-4 pb-4 mt-auto" role="contentinfo">
+      <div class="container py-3">
+        <p class="small hp3-footer-notice mb-0">Bu site yalnızca Hayat Park 3 maliklerine genel bilgi sunar; resmi tebligat veya bağlayıcı belgelerin yerini tutmaz; hukuki veya mali tavsiye değildir.</p>
+        <div class="d-flex flex-column flex-md-row align-items-center justify-content-between gap-2 pt-3 mt-3 border-top border-white border-opacity-25">
+          <nav class="hp3-footer-nav flex-wrap justify-content-center justify-content-md-start" aria-label="Alt bilgi menüsü">
+            <a href="index.html">Ana Sayfa</a>
+            <span class="text-white-50 d-none d-sm-inline">&nbsp;·&nbsp;</span>
+            <a href="gallery.html">Fotoğraflar</a>
+            <span class="text-white-50 d-none d-sm-inline">&nbsp;·&nbsp;</span>
+            <a href="announcements.html">Duyurular</a>
+            <span class="text-white-50 d-none d-sm-inline">&nbsp;·&nbsp;</span>
+            <a href="meetings.html">Toplantılar</a>
+            <span class="text-white-50 d-none d-sm-inline">&nbsp;·&nbsp;</span>
+            <a href="contact.html">İletişim</a>
+          </nav>
+          <p class="small hp3-muted-link mb-0 text-center text-md-end">© <span id="footer-year">2026</span> Hayat Park 3 AVM</p>
+        </div>
+      </div>
+    </footer>
+    <script src="../assets/js/language-switcher.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js" defer></script>
+    <script src="../assets/js/gallery.js" defer></script>
+    <script src="../assets/js/main.js" defer></script>
+  </body>
+</html>

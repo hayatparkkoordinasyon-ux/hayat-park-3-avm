@@ -1,0 +1,11 @@
+{
+  "name": "Hayat Park 3 AVM — Owners",
+  "short_name": "HP3 Owners",
+  "description": "Static owner communication portal for Hayat Park 3 AVM.",
+  "lang": "en",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#0a1b2f"
+}
