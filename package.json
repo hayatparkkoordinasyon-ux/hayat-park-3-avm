@@ -1,0 +1,21 @@
+{
+  "name": "hayat-park-3-avm",
+  "version": "1.0.0",
+  "description": "Bu site yalnızca Hayat Park 3 maliklerine genel bilgi sunar; resmi tebligat veya bağlayıcı belgelerin yerini tutmaz; hukuki veya mali tavsiye değildir.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hayatparkkoordinasyon-ux/hayat-park-3-avm.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/hayatparkkoordinasyon-ux/hayat-park-3-avm/issues"
+  },
+  "homepage": "https://github.com/hayatparkkoordinasyon-ux/hayat-park-3-avm#readme"
+}

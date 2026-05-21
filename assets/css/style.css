@@ -40,9 +40,16 @@
   );
   --hp3-quick-card-bg: rgba(4, 10, 18, 0.93);
   --hp3-quick-card-border: rgba(255, 255, 255, 0.34);
-  --hp3-touch-min: 2.75rem;
+  --hp3-touch-min: 2.75rem; /* 44px — minimum touch target */
   --hp3-space-section-y: 2rem;
   --hp3-space-hero-y: 2.5rem;
+  --hp3-gutter-x: 2rem; /* 1rem side padding on narrow viewports */
+}
+
+@media (min-width: 576px) {
+  :root {
+    --hp3-gutter-x: 1.5rem; /* aligns with Bootstrap default container gutter */
+  }
 }
 
 @media (min-width: 992px) {
@@ -70,6 +77,8 @@ html {
   scroll-behavior: smooth;
   overflow-x: hidden;
   overflow-x: clip;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
 }
 
 body.hp3-body {
@@ -90,6 +99,15 @@ body.hp3-body {
 .hp3-body .container {
   min-width: 0;
   max-width: 100%;
+}
+
+.hp3-body .container {
+  padding-left: max(calc(var(--hp3-gutter-x) * 0.5), env(safe-area-inset-left, 0));
+  padding-right: max(calc(var(--hp3-gutter-x) * 0.5), env(safe-area-inset-right, 0));
+}
+
+.hp3-body .row > [class*="col-"] {
+  min-width: 0;
 }
 
 html[lang="ar"] body.hp3-body,
@@ -136,6 +154,24 @@ html[lang="fa"] body.hp3-body {
 @media (max-width: 991.98px) {
   .navbar.hp3-navbar.sticky-top {
     top: env(safe-area-inset-top, 0);
+  }
+
+  /* Solid panels over hero photo — avoids washed-out glass on small screens */
+  .hp3-quick-card {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    background: rgba(4, 10, 18, 0.96) !important;
+    border-color: rgba(255, 255, 255, 0.38) !important;
+  }
+
+  .hp3-hero-metrics .metric {
+    background: rgba(4, 10, 18, 0.88);
+    border-color: rgba(255, 255, 255, 0.42);
+    backdrop-filter: none;
+  }
+
+  .hp3-hero.hp3-hero-photo::before {
+    background: rgba(4, 10, 18, 0.58);
   }
 
   /* Large tap targets in collapsed navigation */
@@ -249,7 +285,8 @@ html[lang="fa"] body.hp3-body {
 
   .hp3-gallery-filters .btn {
     flex: 1 1 calc(50% - 0.25rem);
-    min-width: 9.5rem;
+    min-width: 0;
+    max-width: 100%;
     flex-shrink: 1;
     white-space: normal;
     text-align: center;
@@ -257,6 +294,21 @@ html[lang="fa"] body.hp3-body {
     line-height: 1.25;
     padding-top: 0.5rem;
     padding-bottom: 0.5rem;
+  }
+
+  .lead.hp3-lead-soft {
+    font-size: 1.0625rem;
+    line-height: 1.65;
+  }
+
+  .hp3-index-bg .hp3-card .card-body {
+    padding: 1.25rem 1rem;
+    min-height: 3.5rem;
+  }
+
+  .hp3-hero-statement {
+    padding: 1rem;
+    font-size: clamp(1rem, 2.5vw + 0.5rem, 1.25rem);
   }
 
   .gallery-item.hp3-gallery-item figcaption {
@@ -283,6 +335,12 @@ html[lang="fa"] body.hp3-body {
   html[lang="ar"] .hp3-footer-simple .container,
   html[lang="fa"] .hp3-footer-simple .container {
     text-align: start;
+  }
+}
+
+@media (max-width: 359.98px) {
+  .hp3-gallery-filters .btn {
+    flex: 1 1 100%;
   }
 }
 
@@ -343,7 +401,7 @@ html[lang="fa"] body.hp3-body {
 
 .hp3-brand-sub {
   display: block;
-  font-size: 0.75rem;
+  font-size: max(0.75rem, 12px);
   font-weight: 600;
   color: var(--hp3-muted);
   margin-top: -0.05rem;
@@ -351,19 +409,18 @@ html[lang="fa"] body.hp3-body {
   line-height: 1.35;
 }
 
-@media (min-width: 576px) {
-  .hp3-brand-sub {
-    font-size: 0.65rem;
-  }
-}
-
-/* Language dropdown — match nav typography */
+/* Language dropdown — match nav typography; 44px touch target sitewide */
 .hp3-lang .dropdown-toggle {
   border-radius: var(--hp3-radius);
   border-color: rgba(15, 39, 68, 0.15) !important;
   background: rgba(255, 255, 255, 0.55);
   color: var(--hp3-nav-muted) !important;
   font-weight: 600;
+  min-height: var(--hp3-touch-min);
+  padding-top: 0.55rem;
+  padding-bottom: 0.55rem;
+  display: inline-flex;
+  align-items: center;
 }
 
 .hp3-lang .dropdown-toggle:focus {
@@ -441,7 +498,13 @@ html[lang="fa"] body.hp3-body {
 }
 
 .hp3-body.hp3-index-bg .hp3-index-intro .text-secondary {
-  color: rgba(255, 255, 255, 0.78) !important;
+  color: rgba(255, 255, 255, 0.92) !important;
+}
+
+@media (min-width: 992px) {
+  .hp3-body.hp3-index-bg .hp3-index-intro .text-secondary {
+    color: rgba(255, 255, 255, 0.78) !important;
+  }
 }
 
 /* Root language picker — turquoise card CTAs on index.html */
@@ -465,9 +528,16 @@ html[lang="fa"] body.hp3-body {
   position: relative;
   z-index: 2;
   width: 100%;
+  padding-top: 0.5rem;
+  padding-bottom: 1.25rem;
 }
 
 @media (min-width: 768px) {
+  .hp3-hero.hp3-hero-photo > .container {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+
   .hp3-hero.hp3-hero-photo {
     min-height: calc(100dvh - 4.5rem);
   }
@@ -752,9 +822,19 @@ html[lang="fa"] body.hp3-body {
   padding-block: 2rem;
 }
 
+.hp3-purpose-section.py-5 {
+  padding-top: 2rem !important;
+  padding-bottom: 2rem !important;
+}
+
 @media (min-width: 768px) {
   .hp3-purpose-section {
     padding-block: 3rem;
+  }
+
+  .hp3-purpose-section.py-5 {
+    padding-top: 3rem !important;
+    padding-bottom: 3rem !important;
   }
 }
 
@@ -820,6 +900,10 @@ html[lang="fa"] body.hp3-body {
 
 .hp3-footer-nav span.text-white-50 {
   user-select: none;
+}
+
+.hp3-footer .text-white-50 {
+  color: rgba(255, 255, 255, 0.78) !important;
 }
 
 /* Breadcrumb */
@@ -934,17 +1018,12 @@ html[dir="rtl"] .breadcrumb.hp3-breadcrumb {
   z-index: 2;
 }
 
-/* Gallery filter buttons */
+/* Gallery filter buttons — 44px touch targets; compact on desktop only */
 .hp3-gallery-filters .btn {
   border-radius: 999px;
   padding-inline: 1rem;
   min-height: var(--hp3-touch-min);
-}
-
-@media (min-width: 992px) {
-  .hp3-gallery-filters .btn {
-    min-height: auto;
-  }
+  line-height: 1.25;
 }
 
 .hp3-gallery-filters .btn.active {
@@ -1058,6 +1137,10 @@ html[lang="fa"] .hp3-gallery-play {
   font-weight: 600;
   padding: 1rem 1.15rem;
   line-height: 1.45;
+}
+
+.hp3-body main.flex-grow-1 {
+  overflow-x: clip;
 }
 
 .hp3-body .accordion-button:not(.collapsed) {
