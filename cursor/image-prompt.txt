@@ -1,0 +1,9 @@
+Read all images from the images folder and insert them into the photo/gallery section named Outside View (name start with 'dis-gorunus) in every language-specific HTML file.
+Requirements:
+Detect all HTML files for each language automatically.
+Find the section/category tagged or identified as dis-gorunus.
+Add the images from the images folder into that section.
+Preserve the existing HTML structure and styling.
+Do not modify unrelated sections.
+Ensure image paths are correct and relative to the HTML files.
+Avoid duplicate image entries if an image already exists.
