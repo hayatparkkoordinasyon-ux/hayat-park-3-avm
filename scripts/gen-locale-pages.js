@@ -318,12 +318,6 @@ const GL_CSS = '<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glight
 const GL_JS =
   '    <script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js" defer></script>\n    <script src="../assets/js/gallery.js" defer></script>';
 
-const photoFilLabels = {
-  en: ["All", "Construction Progress", "Meeting Photos", "Official Documents", "Drone Imagery", "Outside View"],
-  tr: ["Tümü", "İnşaat İlerlemesi", "Toplantı Görselleri", "Resmi Belgeler", "Drone Görselleri", "Dış Görünüm"],
-  ar: ["الكل", "تقدم الإنشاءات", "صور الاجتماعات", "وثائق رسمية", "صور بطائرة مسيّرة", "المنظر الخارجي"],
-  fa: ["همه", "پیشرفت ساخت", "تصاویر جلسات", "اسناد رسمی", "تصاویر پهپادی", "نمای بیرونی"],
-};
 
 function photosPage(locale) {
   const rtl = locale === "ar" || locale === "fa";
@@ -354,7 +348,6 @@ function photosPage(locale) {
   };
   const cnt = { en: "Item count", tr: "Öğe sayısı", ar: "عدد العناصر", fa: "تعداد موارد" };
   const bcAria = { en: "Breadcrumb", tr: "Sayfa konumu", ar: "مسار التصفح", fa: "مسیر صفحه" };
-  const [f0, f1, f2, f3, f4, f5] = photoFilLabels[locale];
   const bs = rtl ? "bootstrap.rtl.min.css" : "bootstrap.min.css";
   return `<!DOCTYPE html>
 <html lang="${locale}" dir="${rtl ? "rtl" : "ltr"}">
@@ -374,14 +367,7 @@ ${nav(locale, "photos")}
           <p class="text-secondary mb-2">${lead[locale]}</p>
           <p class="small text-secondary mb-0">${cnt[locale]}: <strong class="hp3-gallery-count-live">0</strong></p>
         </header>
-        <div class="hp3-gallery-filters d-flex flex-wrap gap-2 mb-4" role="toolbar" aria-label="${x.photos}">
-          <button type="button" class="btn btn-primary hp3-filter-btn active" data-filter="all" data-hp3-filter-all><span>${f0}</span></button>
-          <button type="button" class="btn btn-outline-secondary hp3-filter-btn" data-filter="construction">${f1}</button>
-          <button type="button" class="btn btn-outline-secondary hp3-filter-btn" data-filter="meetings">${f2}</button>
-          <button type="button" class="btn btn-outline-secondary hp3-filter-btn" data-filter="documents">${f3}</button>
-          <button type="button" class="btn btn-outline-secondary hp3-filter-btn" data-filter="drone">${f4}</button>
-          <button type="button" class="btn btn-outline-secondary hp3-filter-btn" data-filter="dis-gorunus">${f5}</button>
-        </div>
+        <div class="hp3-gallery-filters d-flex flex-wrap gap-2 mb-4" role="toolbar" aria-label="${x.photos}"></div>
         <div id="hp3-gallery-root" class="row g-4" aria-live="polite"></div>
       </div>
     </main>
