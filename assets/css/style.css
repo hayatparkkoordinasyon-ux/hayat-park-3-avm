@@ -1064,12 +1064,15 @@ html[dir="rtl"] .breadcrumb.hp3-breadcrumb {
 }
 
 /* Gallery item */
-.gallery-item.hp3-gallery-item img {
+.gallery-item.hp3-gallery-item img,
+.gallery-item.hp3-gallery-item video.hp3-video-thumb {
   border-radius: 0.6rem;
   width: 100%;
   aspect-ratio: 4 / 3;
   object-fit: cover;
   transition: transform 0.28s ease;
+  display: block;
+  background: var(--hp3-navy-dark);
 }
 
 .gallery-item.hp3-gallery-item {
@@ -1096,7 +1099,8 @@ html[dir="rtl"] .breadcrumb.hp3-breadcrumb {
 }
 
 @media (hover: hover) and (pointer: fine) {
-  .gallery-item.hp3-gallery-item .gallery-thumb-wrapper:hover img {
+  .gallery-item.hp3-gallery-item .gallery-thumb-wrapper:hover img,
+  .gallery-item.hp3-gallery-item .gallery-thumb-wrapper:hover video.hp3-video-thumb {
     transform: scale(1.045);
   }
 }

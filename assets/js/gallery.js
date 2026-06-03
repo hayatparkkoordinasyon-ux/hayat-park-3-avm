@@ -62,18 +62,16 @@
     "otopark-1555.jpeg",
   ];
 
-  var YT_IDS = [
-    "btMdybxPsLc",
-    "aSiVs3qgFJM",
-    "WtHTZ__bra8",
-    "Wo2b4mTJzOk",
-    "YE7VzlLtplA",
-    "GpRUUhmEhwY",
-    "wbSQoylsKvs",
-    "Ga6w7Fp84pI",
-    "GPfYDp9mo64",
-    "ScMzIvxBSi4",
-    "RgKAFKdddjQ",
+  var VIDEO_FILTER_ORDER = [
+    "dis-cephe-video",
+    "ic-cephe-video",
+    "zemin-otopark",
+  ];
+
+  var VIDEO_FILENAMES = [
+    "dis-cephe-video-1.mp4",
+    "ic-cephe-video-1.mp4",
+    "zemin-otopark.mp4",
   ];
 
   var LEX = {
@@ -86,6 +84,9 @@
         tavan: "Ceiling",
         "dukkan-ornek": "Shop Example",
         otopark: "Parking",
+        "dis-cephe-video": "Exterior Façade Video",
+        "ic-cephe-video": "Interior Façade Video",
+        "zemin-otopark": "Ground Parking",
         videos: "Videos",
       },
       imageTitle: function (i, cat) {
@@ -100,13 +101,17 @@
           ")."
         );
       },
-      videoTitle: function (i) {
-        return "Project video update #" + i + " (placeholder stream)";
+      videoTitle: function (i, cat) {
+        return this.filters[cat] + " — video " + i;
       },
-      videoCaption: function (i) {
-        return "Placeholder YouTube item for meetings, drone flyovers, or official statements. Replace with your channel link (HP3-VID-" +
-          String(i).padStart(3, "0") +
-          ").";
+      videoCaption: function (i, cat) {
+        return (
+          "Hayat Park 3 AVM — " +
+          this.filters[cat] +
+          " (" +
+          String(i).padStart(2, "0") +
+          ")."
+        );
       },
     },
     tr: {
@@ -118,6 +123,9 @@
         tavan: "Tavan",
         "dukkan-ornek": "Dükkan Örneği",
         otopark: "Otopark",
+        "dis-cephe-video": "Dış Cephe Video",
+        "ic-cephe-video": "İç Cephe Video",
+        "zemin-otopark": "Zemin Otopark",
         videos: "Videolar",
       },
       imageTitle: function (i, cat) {
@@ -132,13 +140,17 @@
           ")."
         );
       },
-      videoTitle: function (i) {
-        return "Proje video güncellemesi #" + i + " (yer tutucu)";
+      videoTitle: function (i, cat) {
+        return this.filters[cat] + " — video " + i;
       },
-      videoCaption: function (i) {
-        return "Toplantı özeti, drone uçuşu veya resmi açıklamalar için yer tutucu YouTube öğesi. Kanal bağlantınızla değiştirin (HP3-VID-" +
-          String(i).padStart(3, "0") +
-          ").";
+      videoCaption: function (i, cat) {
+        return (
+          "Hayat Park 3 AVM — " +
+          this.filters[cat] +
+          " (" +
+          String(i).padStart(2, "0") +
+          ")."
+        );
       },
     },
     ar: {
@@ -150,6 +162,9 @@
         tavan: "السقف",
         "dukkan-ornek": "نموذج محل",
         otopark: "موقف السيارات",
+        "dis-cephe-video": "فيديو الواجهة الخارجية",
+        "ic-cephe-video": "فيديو الواجهة الداخلية",
+        "zemin-otopark": "موقف السيارات الأرضي",
         videos: "مقاطع فيديو",
       },
       imageTitle: function (i, cat) {
@@ -164,13 +179,17 @@
           ")."
         );
       },
-      videoTitle: function (i) {
-        return "تحديث مرئي رقم " + i + " (ربط تجريبي)";
+      videoTitle: function (i, cat) {
+        return this.filters[cat] + " — فيديو " + i;
       },
-      videoCaption: function (i) {
-        return "عنصر فيديو احتياطي على يوتيوب لمحاضر الاجتماعات أو الطيران الجوي أو البيانات الرسمية؛ يُستبدل برابطكم الرسمي. المرجع: HP3-VID-" +
-          String(i).padStart(3, "0") +
-          ".";
+      videoCaption: function (i, cat) {
+        return (
+          "Hayat Park 3 AVM — " +
+          this.filters[cat] +
+          " (" +
+          String(i).padStart(2, "0") +
+          ")."
+        );
       },
     },
     fa: {
@@ -182,6 +201,9 @@
         tavan: "سقف",
         "dukkan-ornek": "نمونه مغازه",
         otopark: "پارکینگ",
+        "dis-cephe-video": "ویدئوی نمای بیرونی",
+        "ic-cephe-video": "ویدئوی نمای داخلی",
+        "zemin-otopark": "پارکینگ همکف",
         videos: "ویدئوها",
       },
       imageTitle: function (i, cat) {
@@ -196,13 +218,17 @@
           ")."
         );
       },
-      videoTitle: function (i) {
-        return "به‌روزرسانی تصویری شماره " + i + " (لینک جای‌گیر)";
+      videoTitle: function (i, cat) {
+        return this.filters[cat] + " — ویدئو " + i;
       },
-      videoCaption: function (i) {
-        return "ویدئوی جای‌گیر یوتوب برای خلاصه جلسات، پرواز پهپادی یا بیانیه رسمی؛ پس از آماده‌شدن کانال رسمی جایگزین شود. شناسه: HP3-VID-" +
-          String(i).padStart(3, "0") +
-          ".";
+      videoCaption: function (i, cat) {
+        return (
+          "Hayat Park 3 AVM — " +
+          this.filters[cat] +
+          " (" +
+          String(i).padStart(2, "0") +
+          ")."
+        );
       },
     },
   };
@@ -223,9 +249,11 @@
   }
 
   function tagFromFilename(filename) {
-    var base = filename.replace(/(\.(jpe?g|webp))+$/i, "");
-    var dash = base.lastIndexOf("-");
-    return dash > 0 ? base.slice(0, dash) : base;
+    var base = filename.replace(/(\.(mp4|jpe?g|webp))+$/i, "");
+    if (/^(.+)-(\d+[a-zA-Z]*)$/.test(base)) {
+      return base.replace(/-(\d+[a-zA-Z]*)$/, "");
+    }
+    return base;
   }
 
   function escapeAttr(s) {
@@ -284,7 +312,7 @@
     });
   }
 
-  function renderFilterButtons(L) {
+  function renderFilterButtons(L, filterOrder) {
     var $filters = $(".hp3-gallery-filters");
     if (!$filters.length) return;
 
@@ -293,7 +321,7 @@
       escapeAttr(L.filters.all) +
       "</span></button>";
 
-    PHOTO_FILTER_ORDER.forEach(function (cat) {
+    filterOrder.forEach(function (cat) {
       html +=
         '<button type="button" class="btn btn-outline-secondary hp3-filter-btn" data-filter="' +
         escapeAttr(cat) +
@@ -313,11 +341,13 @@
 
     var $filters = $(".hp3-gallery-filters");
     if ($filters.length) {
-      $filters.toggle(mode === "photos");
+      $filters.show();
     }
 
     if (mode === "photos") {
-      renderFilterButtons(L);
+      renderFilterButtons(L, PHOTO_FILTER_ORDER);
+    } else if (mode === "videos") {
+      renderFilterButtons(L, VIDEO_FILTER_ORDER);
     }
 
     var html = "";
@@ -359,30 +389,28 @@
       );
     }
 
-    function videoBlock(vidx, catKeyAlwaysVideos) {
-      var id = YT_IDS[(vidx - 1) % YT_IDS.length];
-      var yt = "https://www.youtube.com/watch?v=" + id;
-      var thumb = "https://i.ytimg.com/vi/" + id + "/hqdefault.jpg";
-      var title = L.videoTitle.call(L, vidx);
-      var caption = L.videoCaption.call(L, vidx);
+    function localVideoBlock(i, catKey, filename) {
+      var videoPath = "../videos/" + filename;
+      var title = L.videoTitle.call(L, i, catKey);
+      var caption = L.videoCaption.call(L, i, catKey);
       var dataBox =
         "title: " + sanitizeGlightboxText(title) + "; description: " + sanitizeGlightboxText(caption);
 
       return (
         '<figure class="col-6 col-md-4 col-lg-3 gallery-item hp3-gallery-item" data-category="' +
-        catKeyAlwaysVideos +
+        catKey +
         '">' +
         '<div class="gallery-thumb-wrapper">' +
         '<a href="' +
-        escapeAttr(yt) +
+        escapeAttr(videoPath) +
         '" class="glightbox hp3-gallery-visible" data-glightbox="' +
         escapeAttr(dataBox) +
         '" data-type="video">' +
-        '<img loading="lazy" decoding="async" src="' +
-        escapeAttr(thumb) +
-        '" alt="' +
-        escapeAttr(title) +
-        '" />' +
+        '<video class="hp3-video-thumb" preload="metadata" muted playsinline aria-hidden="true">' +
+        '<source src="' +
+        escapeAttr(videoPath) +
+        '" type="video/mp4" />' +
+        "</video>" +
         '<span class="hp3-gallery-play" aria-hidden="true">&#9654;</span>' +
         "</a>" +
         "</div>" +
@@ -406,15 +434,21 @@
         html += galleryFigure(categoryCounts[catKey], catKey, imagePath, imagePath);
       });
     } else {
-      var v;
-      for (v = 1; v <= 12; v += 1) {
-        html += videoBlock(v, "videos");
-      }
+      var videoCategoryCounts = {};
+
+      VIDEO_FILENAMES.forEach(function (filename) {
+        var catKey = tagFromFilename(filename);
+        if (!videoCategoryCounts[catKey]) {
+          videoCategoryCounts[catKey] = 0;
+        }
+        videoCategoryCounts[catKey] += 1;
+        html += localVideoBlock(videoCategoryCounts[catKey], catKey, filename);
+      });
     }
 
     $grid.html(html);
 
-    if (mode === "photos") {
+    if (mode === "photos" || mode === "videos") {
       $(".gallery-item.filtered-out").removeClass("filtered-out");
       $("a.glightbox").each(function () {
         $(this)
@@ -423,13 +457,6 @@
           .attr("tabindex", "0");
       });
       attachFilters();
-    } else {
-      $("a.glightbox").each(function () {
-        $(this)
-          .addClass("hp3-gallery-visible")
-          .attr("aria-hidden", "false")
-          .attr("tabindex", "0");
-      });
     }
 
     rebuildLightbox();
