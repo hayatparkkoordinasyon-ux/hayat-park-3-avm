@@ -341,10 +341,10 @@ function photosPage(locale) {
     fa: "تصاویر پروژه",
   };
   const lead = {
-    en: 'Tap a thumbnail to open the full image. Update media URLs in <code>assets/js/gallery.js</code>.',
-    tr: 'Küçük resme dokunun; tam görüntü açılır. Adresleri <code>assets/js/gallery.js</code> içinden güncelleyin.',
-    ar: "اضغط المصغّرة للعرض الكامل. مرّر للتنقّل على الهاتف.",
-    fa: "برای مشاهدهٔ کامل روی بندانگشتی بزنید. آدرس رسانه‌ها را در gallery.js قرار دهید.",
+    en: "The gallery opens with the <strong>region map</strong>, showing surrounding residential areas including Hayatpark 1, Hayatpark 2, Ege Yapı Bahçeada Bahçeşehir, Nature/Natura Bahçeşehir, and AVM parcels. Tap a thumbnail to open the full image.",
+    tr: "Galerinin en üstünde <strong>bölge haritası</strong> yer alır; Hayatpark 1, Hayatpark 2, Ege Yapı Bahçeada Bahçeşehir, Nature/Natura Bahçeşehir ve AVM parselleri gibi çevredeki konut alanlarını gösterir. Küçük resme dokunun; tam görüntü açılır.",
+    ar: "تبدأ المعرض بـ<strong>خريطة المنطقة</strong> التي تُظهر المناطق السكنية المجاورة مثل حياة بارك 1 وحياة بارك 2 وإيجه يابي باهتشهاده باهتشهير وناتشر/ناتورا باهتشهير وأراضي المركز التجاري. اضغط المصغّرة للعرض الكامل.",
+    fa: "گالری با <strong>نقشه منطقه</strong> آغاز می‌شود و مناطق مسکونی اطراف از جمله Hayatpark 1، Hayatpark 2، Ege Yapı Bahçeada Bahçeşehir، Nature/Natura Bahçeşehir و پارسل‌های AVM را نشان می‌دهد. برای مشاهدهٔ کامل روی بندانگشتی بزنید.",
   };
   const cnt = { en: "Item count", tr: "Öğe sayısı", ar: "عدد العناصر", fa: "تعداد موارد" };
   const bcAria = { en: "Breadcrumb", tr: "Sayfa konumu", ar: "مسار التصفح", fa: "مسیر صفحه" };
@@ -398,10 +398,10 @@ function videosPage(locale) {
     fa: "ویدئوهای پروژه",
   };
   const lead = {
-    en: 'Tap a thumbnail to play the video. Update YouTube links in <code>assets/js/gallery.js</code>.',
-    tr: "Küçük resme dokunun; video oynatıcı açılır. YouTube bağlantılarını <code>assets/js/gallery.js</code> içinden güncelleyin.",
-    ar: "اضغط المصغّرة لتشغيل الفيديو. استبدل روابط يوتيوب في gallery.js.",
-    fa: "برای پخش روی بندانگشتی بزنید. لینک‌های یوتوب را در gallery.js به‌روز کنید.",
+    en: 'Tap a thumbnail to play the video. Update video files in <code>assets/js/gallery.js</code>.',
+    tr: "Küçük resme dokunun; video oynatıcı açılır. Videoları <code>assets/js/gallery.js</code> içinden güncelleyin.",
+    ar: "اضغط المصغّرة لتشغيل الفيديو. حدّث ملفات الفيديو في <code>assets/js/gallery.js</code>.",
+    fa: "برای پخش روی بندانگشتی بزنید. ویدئوها را در <code>assets/js/gallery.js</code> به‌روز کنید.",
   };
   const cnt = { en: "Item count", tr: "Öğe sayısı", ar: "عدد العناصر", fa: "تعداد موارد" };
   const bcAria = { en: "Breadcrumb", tr: "Sayfa konumu", ar: "مسار التصفح", fa: "مسیر صفحه" };
@@ -424,6 +424,7 @@ ${nav(locale, "videos")}
           <p class="text-secondary mb-2">${lead[locale]}</p>
           <p class="small text-secondary mb-0">${cnt[locale]}: <strong class="hp3-gallery-count-live">0</strong></p>
         </header>
+        <div class="hp3-gallery-filters d-flex flex-wrap gap-2 mb-4" role="toolbar" aria-label="${x.videos}"></div>
         <div id="hp3-gallery-root" class="row g-4" aria-live="polite"></div>
       </div>
     </main>
