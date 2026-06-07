@@ -5,15 +5,8 @@
 (function ($) {
   "use strict";
 
-  var PHOTO_FEATURED = [
-    {
-      filename: "AVM-Projesi-Harita.jpeg",
-      category: "bolge-haritasi",
-    },
-  ];
-
   var PHOTO_FILTER_ORDER = [
-    "bolge-haritasi",
+    "AVM-Projesi-Harita",
     "dis-gorunus",
     "ic-kisim",
     "koridor",
@@ -23,6 +16,7 @@
   ];
 
   var PHOTO_FILENAMES = [
+    "AVM-Projesi-Harita.jpeg",
     "dis-gorunus-1.jpeg",
     "dis-gorunus-2.jpeg",
     "dis-gorunus-3.jpeg",
@@ -70,38 +64,41 @@
     "otopark-1555.jpeg",
   ];
 
-  var VIDEO_FILTER_ORDER = [
-    "dis-cephe-video",
-    "ic-cephe-video",
-    "zemin-otopark",
-  ];
-
-  var VIDEO_FILENAMES = [
-    "dis-cephe-video-1.mp4",
-    "ic-cephe-video-1.mp4",
-    "zemin-otopark.mp4",
+  var YT_IDS = [
+    "btMdybxPsLc",
+    "aSiVs3qgFJM",
+    "WtHTZ__bra8",
+    "Wo2b4mTJzOk",
+    "YE7VzlLtplA",
+    "GpRUUhmEhwY",
+    "wbSQoylsKvs",
+    "Ga6w7Fp84pI",
+    "GPfYDp9mo64",
+    "ScMzIvxBSi4",
+    "RgKAFKdddjQ",
   ];
 
   var LEX = {
     en: {
       filters: {
         all: "All",
-        "bolge-haritasi": "Region Map",
+        "AVM-Projesi-Harita": "Map",
         "dis-gorunus": "Outside View",
         "ic-kisim": "Interior",
         koridor: "Corridor",
         tavan: "Ceiling",
         "dukkan-ornek": "Shop Example",
         otopark: "Parking",
-        "dis-cephe-video": "Exterior Façade Video",
-        "ic-cephe-video": "Interior Façade Video",
-        "zemin-otopark": "Ground Parking",
         videos: "Videos",
       },
       imageTitle: function (i, cat) {
+        if (cat === "AVM-Projesi-Harita") return "Project Map — Region Details";
         return this.filters[cat] + " — photo " + i;
       },
       imageCaption: function (i, cat) {
+        if (cat === "AVM-Projesi-Harita") {
+          return "Hayat Park 3 AVM — Regional map showing surrounding residential areas: Hayatpark 1, Hayatpark 2, Ege Yapı Bahçeada Bahçeşehir, and Nature/Natura Bahçeşehir.";
+        }
         return (
           "Hayat Park 3 AVM — " +
           this.filters[cat] +
@@ -110,38 +107,35 @@
           ")."
         );
       },
-      videoTitle: function (i, cat) {
-        return this.filters[cat] + " — video " + i;
+      videoTitle: function (i) {
+        return "Project video update #" + i + " (placeholder stream)";
       },
-      videoCaption: function (i, cat) {
-        return (
-          "Hayat Park 3 AVM — " +
-          this.filters[cat] +
-          " (" +
-          String(i).padStart(2, "0") +
-          ")."
-        );
+      videoCaption: function (i) {
+        return "Placeholder YouTube item for meetings, drone flyovers, or official statements. Replace with your channel link (HP3-VID-" +
+          String(i).padStart(3, "0") +
+          ").";
       },
     },
     tr: {
       filters: {
         all: "Tümü",
-        "bolge-haritasi": "Bölge Haritası",
+        "AVM-Projesi-Harita": "Harita",
         "dis-gorunus": "Dış Görünüm",
         "ic-kisim": "İç Kısım",
         koridor: "Koridor",
         tavan: "Tavan",
         "dukkan-ornek": "Dükkan Örneği",
         otopark: "Otopark",
-        "dis-cephe-video": "Dış Cephe Video",
-        "ic-cephe-video": "İç Cephe Video",
-        "zemin-otopark": "Zemin Otopark",
         videos: "Videolar",
       },
       imageTitle: function (i, cat) {
+        if (cat === "AVM-Projesi-Harita") return "Proje Haritası — Bölge Detayları";
         return this.filters[cat] + " — fotoğraf " + i;
       },
       imageCaption: function (i, cat) {
+        if (cat === "AVM-Projesi-Harita") {
+          return "Hayat Park 3 AVM — Bölgedeki diğer konut alanlarını gösteren harita: Hayatpark 1, Hayatpark 2, Ege Yapı Bahçeada Bahçeşehir ve Nature/Natura Bahçeşehir.";
+        }
         return (
           "Hayat Park 3 AVM — " +
           this.filters[cat] +
@@ -150,38 +144,35 @@
           ")."
         );
       },
-      videoTitle: function (i, cat) {
-        return this.filters[cat] + " — video " + i;
+      videoTitle: function (i) {
+        return "Proje video güncellemesi #" + i + " (yer tutucu)";
       },
-      videoCaption: function (i, cat) {
-        return (
-          "Hayat Park 3 AVM — " +
-          this.filters[cat] +
-          " (" +
-          String(i).padStart(2, "0") +
-          ")."
-        );
+      videoCaption: function (i) {
+        return "Toplantı özeti, drone uçuşu veya resmi açıklamalar için yer tutucu YouTube öğesi. Kanal bağlantınızla değiştirin (HP3-VID-" +
+          String(i).padStart(3, "0") +
+          ").";
       },
     },
     ar: {
       filters: {
         all: "الكل",
-        "bolge-haritasi": "خريطة المنطقة",
+        "AVM-Projesi-Harita": "خريطة",
         "dis-gorunus": "المنظر الخارجي",
         "ic-kisim": "الداخل",
         koridor: "الممر",
         tavan: "السقف",
         "dukkan-ornek": "نموذج محل",
         otopark: "موقف السيارات",
-        "dis-cephe-video": "فيديو الواجهة الخارجية",
-        "ic-cephe-video": "فيديو الواجهة الداخلية",
-        "zemin-otopark": "موقف السيارات الأرضي",
         videos: "مقاطع فيديو",
       },
       imageTitle: function (i, cat) {
+        if (cat === "AVM-Projesi-Harita") return "خريطة المشروع — تفاصيل المنطقة";
         return this.filters[cat] + " — صورة " + i;
       },
       imageCaption: function (i, cat) {
+        if (cat === "AVM-Projesi-Harita") {
+          return "Hayat Park 3 AVM — خريطة توضح المناطق السكنية المحيطة: Hayatpark 1، Hayatpark 2، Ege Yapı Bahçeada Bahçeşehir، و Nature/Natura Bahçeşehir.";
+        }
         return (
           "Hayat Park 3 AVM — " +
           this.filters[cat] +
@@ -190,38 +181,35 @@
           ")."
         );
       },
-      videoTitle: function (i, cat) {
-        return this.filters[cat] + " — فيديو " + i;
+      videoTitle: function (i) {
+        return "تحديث مرئي رقم " + i + " (ربط تجريبي)";
       },
-      videoCaption: function (i, cat) {
-        return (
-          "Hayat Park 3 AVM — " +
-          this.filters[cat] +
-          " (" +
-          String(i).padStart(2, "0") +
-          ")."
-        );
+      videoCaption: function (i) {
+        return "عنصر فيديو احتياطي على يوتيوب لمحاضر الاجتماعات أو الطيران الجوي أو البيانات الرسمية؛ يُستبدل برابطكم الرسمي. المرجع: HP3-VID-" +
+          String(i).padStart(3, "0") +
+          ".";
       },
     },
     fa: {
       filters: {
         all: "همه",
-        "bolge-haritasi": "نقشه منطقه",
+        "AVM-Projesi-Harita": "نقشه",
         "dis-gorunus": "نمای بیرونی",
         "ic-kisim": "فضای داخلی",
         koridor: "راهرو",
         tavan: "سقف",
         "dukkan-ornek": "نمونه مغازه",
         otopark: "پارکینگ",
-        "dis-cephe-video": "ویدئوی نمای بیرونی",
-        "ic-cephe-video": "ویدئوی نمای داخلی",
-        "zemin-otopark": "پارکینگ همکف",
         videos: "ویدئوها",
       },
       imageTitle: function (i, cat) {
+        if (cat === "AVM-Projesi-Harita") return "نقشه پروژه — جزئیات منطقه";
         return this.filters[cat] + " — تصویر " + i;
       },
       imageCaption: function (i, cat) {
+        if (cat === "AVM-Projesi-Harita") {
+          return "Hayat Park 3 AVM — نقشه منطقه که سایر مناطق مسکونی اطراف را نشان می‌دهد: Hayatpark 1، Hayatpark 2، Ege Yapı Bahçeada Bahçeşehir و Nature/Natura Bahçeşehir.";
+        }
         return (
           "Hayat Park 3 AVM — " +
           this.filters[cat] +
@@ -230,57 +218,13 @@
           ")."
         );
       },
-      videoTitle: function (i, cat) {
-        return this.filters[cat] + " — ویدئو " + i;
+      videoTitle: function (i) {
+        return "به‌روزرسانی تصویری شماره " + i + " (لینک جای‌گیر)";
       },
-      videoCaption: function (i, cat) {
-        return (
-          "Hayat Park 3 AVM — " +
-          this.filters[cat] +
-          " (" +
-          String(i).padStart(2, "0") +
-          ")."
-        );
-<<<<<<< HEAD
-      },
-    },
-  };
-
-  var FEATURED_COPY = {
-    "AVM-Projesi-Harita.jpeg": {
-      en: {
-        title: "Region map — surrounding residential projects",
-        caption:
-          "Aerial map of Hayat Park 3 AVM and neighboring residential areas in Bahçeşehir. " +
-          "Marked projects include Hayatpark 1 (Hp1), Hayatpark 2 (Hp2), Ege Yapı Bahçeada Bahçeşehir, " +
-          "Nature/Natura Bahçeşehir, and the AVM parcels. " +
-          "This is the primary reference for owners to see how the project sits among other residential developments in the region.",
-      },
-      tr: {
-        title: "Bölge haritası — çevredeki konut projeleri",
-        caption:
-          "Bahçeşehir'de Hayat Park 3 AVM ve çevresindeki konut alanlarının kuşbakışı haritası. " +
-          "İşaretli projeler: Hayatpark 1 (Hp1), Hayatpark 2 (Hp2), Ege Yapı Bahçeada Bahçeşehir, " +
-          "Nature/Natura Bahçeşehir ve AVM parselleri. " +
-          "Maliklerin bölgedeki diğer rezidans alanlarını ve projenin konumunu görmesi için temel referans görselidir.",
-      },
-      ar: {
-        title: "خريطة المنطقة — مشاريع سكنية مجاورة",
-        caption:
-          "خريطة جوية لمركز حياة بارك 3 التجاري والمناطق السكنية المجاورة في باهتشهير. " +
-          "تشمل المشاريع المحددة: حياة بارك 1 (Hp1)، حياة بارك 2 (Hp2)، إيجه يابي باهتشهاده باهتشهير، " +
-          "ناتشر/ناتورا باهتشهير، وأراضي المركز التجاري. " +
-          "هذا المرجع الأساسي لمالكي العقارات لفهم موقع المشروع بين التطورات السكنية الأخرى في المنطقة.",
-      },
-      fa: {
-        title: "نقشه منطقه — پروژه‌های مسکونی اطراف",
-        caption:
-          "نقشه هوایی Hayat Park 3 AVM و مناطق مسکونی هم‌جوار در باهچه‌شهر. " +
-          "پروژه‌های مشخص‌شده: Hayatpark 1 (Hp1)، Hayatpark 2 (Hp2)، Ege Yapı Bahçeada Bahçeşehir، " +
-          "Nature/Natura Bahçeşehir و پارسل‌های AVM. " +
-          "این تصویر مرجع اصلی مالکان برای دیدن موقعیت پروژه در میان سایر مناطق مسکونی منطقه است.",
-=======
->>>>>>> 2721c79f43af5b6cb5c8c4ffc3ba10726ceadebb
+      videoCaption: function (i) {
+        return "ویدئوی جای‌گیر یوتوب برای خلاصه جلسات، پرواز پهپادی یا بیانیه رسمی؛ پس از آماده‌شدن کانال رسمی جایگزین شود. شناسه: HP3-VID-" +
+          String(i).padStart(3, "0") +
+          ".";
       },
     },
   };
@@ -301,11 +245,9 @@
   }
 
   function tagFromFilename(filename) {
-    var base = filename.replace(/(\.(mp4|jpe?g|webp))+$/i, "");
-    if (/^(.+)-(\d+[a-zA-Z]*)$/.test(base)) {
-      return base.replace(/-(\d+[a-zA-Z]*)$/, "");
-    }
-    return base;
+    var base = filename.replace(/(\.(jpe?g|webp))+$/i, "");
+    var dash = base.lastIndexOf("-");
+    return dash > 0 ? base.slice(0, dash) : base;
   }
 
   function escapeAttr(s) {
@@ -364,7 +306,7 @@
     });
   }
 
-  function renderFilterButtons(L, filterOrder) {
+  function renderFilterButtons(L) {
     var $filters = $(".hp3-gallery-filters");
     if (!$filters.length) return;
 
@@ -373,7 +315,7 @@
       escapeAttr(L.filters.all) +
       "</span></button>";
 
-    filterOrder.forEach(function (cat) {
+    PHOTO_FILTER_ORDER.forEach(function (cat) {
       html +=
         '<button type="button" class="btn btn-outline-secondary hp3-filter-btn" data-filter="' +
         escapeAttr(cat) +
@@ -393,13 +335,11 @@
 
     var $filters = $(".hp3-gallery-filters");
     if ($filters.length) {
-      $filters.show();
+      $filters.toggle(mode === "photos");
     }
 
     if (mode === "photos") {
-      renderFilterButtons(L, PHOTO_FILTER_ORDER);
-    } else if (mode === "videos") {
-      renderFilterButtons(L, VIDEO_FILTER_ORDER);
+      renderFilterButtons(L);
     }
 
     var html = "";
@@ -408,73 +348,11 @@
       return String(s).replace(/;/g, " — ");
     }
 
-    function galleryFigure(i, catKey, thumbUrl, fullUrl, options) {
-      options = options || {};
-      var featured = !!options.featured;
-      var filename = options.filename || "";
-      var featuredCopy =
-        featured && FEATURED_COPY[filename] && FEATURED_COPY[filename][lang]
-          ? FEATURED_COPY[filename][lang]
-          : null;
-      var title = featuredCopy
-        ? featuredCopy.title
-        : L.imageTitle.call(L, i, catKey);
-      var caption = featuredCopy
-        ? featuredCopy.caption
-        : L.imageCaption.call(L, i, catKey);
+    function galleryFigure(i, catKey, thumbUrl, fullUrl) {
+      var title = L.imageTitle.call(L, i, catKey);
+      var caption = L.imageCaption.call(L, i, catKey);
       var lightboxUrl = fullUrl || thumbUrl;
 
-      var dataBox =
-        "title: " + sanitizeGlightboxText(title) + "; description: " + sanitizeGlightboxText(caption);
-
-      var colClass = featured
-        ? "col-12 hp3-gallery-featured"
-        : "col-6 col-md-4 col-lg-3";
-      var imgAttrs = featured
-        ? ' loading="eager" decoding="async" fetchpriority="high"'
-        : ' loading="lazy" decoding="async"';
-      var imgSizes = featured
-        ? ' sizes="(max-width: 992px) 100vw, 80vw"'
-        : ' sizes="(max-width: 576px) 50vw,(max-width: 992px) 33vw,25vw"';
-
-      return (
-        '<figure class="' +
-        colClass +
-        ' gallery-item hp3-gallery-item" data-category="' +
-        catKey +
-        '">' +
-        '<div class="gallery-thumb-wrapper">' +
-        '<a href="' +
-        escapeAttr(lightboxUrl) +
-        '" class="glightbox hp3-gallery-visible" data-glightbox="' +
-        escapeAttr(dataBox) +
-        '">' +
-        '<img' +
-        imgAttrs +
-        ' src="' +
-        escapeAttr(thumbUrl) +
-        '"' +
-        imgSizes +
-        ' class="' +
-        (featured ? "hp3-gallery-featured-img" : "") +
-        '" alt="' +
-        escapeAttr(title) +
-        '" />' +
-        "</a>" +
-        "</div>" +
-        "<figcaption" +
-        (featured ? ' class="hp3-gallery-featured-caption"' : "") +
-        ">" +
-        escapeAttr(caption) +
-        "</figcaption>" +
-        "</figure>"
-      );
-    }
-
-    function localVideoBlock(i, catKey, filename) {
-      var videoPath = "../videos/" + filename;
-      var title = L.videoTitle.call(L, i, catKey);
-      var caption = L.videoCaption.call(L, i, catKey);
       var dataBox =
         "title: " + sanitizeGlightboxText(title) + "; description: " + sanitizeGlightboxText(caption);
 
@@ -484,8 +362,6 @@
         '">' +
         '<div class="gallery-thumb-wrapper">' +
         '<a href="' +
-<<<<<<< HEAD
-=======
         escapeAttr(lightboxUrl) +
         '" class="glightbox hp3-gallery-visible" data-glightbox="' +
         escapeAttr(dataBox) +
@@ -505,29 +381,30 @@
       );
     }
 
-    function localVideoBlock(i, catKey, filename) {
-      var videoPath = "../videos/" + filename;
-      var title = L.videoTitle.call(L, i, catKey);
-      var caption = L.videoCaption.call(L, i, catKey);
+    function videoBlock(vidx, catKeyAlwaysVideos) {
+      var id = YT_IDS[(vidx - 1) % YT_IDS.length];
+      var yt = "https://www.youtube.com/watch?v=" + id;
+      var thumb = "https://i.ytimg.com/vi/" + id + "/hqdefault.jpg";
+      var title = L.videoTitle.call(L, vidx);
+      var caption = L.videoCaption.call(L, vidx);
       var dataBox =
         "title: " + sanitizeGlightboxText(title) + "; description: " + sanitizeGlightboxText(caption);
 
       return (
         '<figure class="col-6 col-md-4 col-lg-3 gallery-item hp3-gallery-item" data-category="' +
-        catKey +
+        catKeyAlwaysVideos +
         '">' +
         '<div class="gallery-thumb-wrapper">' +
         '<a href="' +
->>>>>>> 2721c79f43af5b6cb5c8c4ffc3ba10726ceadebb
-        escapeAttr(videoPath) +
+        escapeAttr(yt) +
         '" class="glightbox hp3-gallery-visible" data-glightbox="' +
         escapeAttr(dataBox) +
         '" data-type="video">' +
-        '<video class="hp3-video-thumb" preload="metadata" muted playsinline aria-hidden="true">' +
-        '<source src="' +
-        escapeAttr(videoPath) +
-        '" type="video/mp4" />' +
-        "</video>" +
+        '<img loading="lazy" decoding="async" src="' +
+        escapeAttr(thumb) +
+        '" alt="' +
+        escapeAttr(title) +
+        '" />' +
         '<span class="hp3-gallery-play" aria-hidden="true">&#9654;</span>' +
         "</a>" +
         "</div>" +
@@ -541,15 +418,6 @@
     if (mode === "photos") {
       var categoryCounts = {};
 
-      PHOTO_FEATURED.forEach(function (item) {
-        var featuredPath = "../images/" + item.filename;
-        html += galleryFigure(1, item.category, featuredPath, featuredPath, {
-          featured: true,
-          filename: item.filename,
-        });
-        categoryCounts[item.category] = 1;
-      });
-
       PHOTO_FILENAMES.forEach(function (filename) {
         var catKey = tagFromFilename(filename);
         if (!categoryCounts[catKey]) {
@@ -560,21 +428,15 @@
         html += galleryFigure(categoryCounts[catKey], catKey, imagePath, imagePath);
       });
     } else {
-      var videoCategoryCounts = {};
-
-      VIDEO_FILENAMES.forEach(function (filename) {
-        var catKey = tagFromFilename(filename);
-        if (!videoCategoryCounts[catKey]) {
-          videoCategoryCounts[catKey] = 0;
-        }
-        videoCategoryCounts[catKey] += 1;
-        html += localVideoBlock(videoCategoryCounts[catKey], catKey, filename);
-      });
+      var v;
+      for (v = 1; v <= 12; v += 1) {
+        html += videoBlock(v, "videos");
+      }
     }
 
     $grid.html(html);
 
-    if (mode === "photos" || mode === "videos") {
+    if (mode === "photos") {
       $(".gallery-item.filtered-out").removeClass("filtered-out");
       $("a.glightbox").each(function () {
         $(this)
@@ -583,6 +445,13 @@
           .attr("tabindex", "0");
       });
       attachFilters();
+    } else {
+      $("a.glightbox").each(function () {
+        $(this)
+          .addClass("hp3-gallery-visible")
+          .attr("aria-hidden", "false")
+          .attr("tabindex", "0");
+      });
     }
 
     rebuildLightbox();
