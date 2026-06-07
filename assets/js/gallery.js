@@ -6,7 +6,7 @@
   "use strict";
 
   var PHOTO_FILTER_ORDER = [
-    "AVM-Projesi-Harita",
+    "map",
     "dis-gorunus",
     "ic-kisim",
     "koridor",
@@ -16,7 +16,7 @@
   ];
 
   var PHOTO_FILENAMES = [
-    "AVM-Projesi-Harita.jpeg",
+    "map.jpeg",
     "dis-gorunus-1.jpeg",
     "dis-gorunus-2.jpeg",
     "dis-gorunus-3.jpeg",
@@ -82,7 +82,7 @@
     en: {
       filters: {
         all: "All",
-        "AVM-Projesi-Harita": "Map",
+        map: "Map",
         "dis-gorunus": "Outside View",
         "ic-kisim": "Interior",
         koridor: "Corridor",
@@ -92,11 +92,11 @@
         videos: "Videos",
       },
       imageTitle: function (i, cat) {
-        if (cat === "AVM-Projesi-Harita") return "Project Map — Region Details";
+        if (cat === "map") return "Project Map — Region Details";
         return this.filters[cat] + " — photo " + i;
       },
       imageCaption: function (i, cat) {
-        if (cat === "AVM-Projesi-Harita") {
+        if (cat === "map") {
           return "Hayat Park 3 AVM — Regional map showing surrounding residential areas: Hayatpark 1, Hayatpark 2, Ege Yapı Bahçeada Bahçeşehir, and Nature/Natura Bahçeşehir.";
         }
         return (
@@ -119,7 +119,7 @@
     tr: {
       filters: {
         all: "Tümü",
-        "AVM-Projesi-Harita": "Harita",
+        map: "Harita",
         "dis-gorunus": "Dış Görünüm",
         "ic-kisim": "İç Kısım",
         koridor: "Koridor",
@@ -129,11 +129,11 @@
         videos: "Videolar",
       },
       imageTitle: function (i, cat) {
-        if (cat === "AVM-Projesi-Harita") return "Proje Haritası — Bölge Detayları";
+        if (cat === "map") return "Proje Haritası — Bölge Detayları";
         return this.filters[cat] + " — fotoğraf " + i;
       },
       imageCaption: function (i, cat) {
-        if (cat === "AVM-Projesi-Harita") {
+        if (cat === "map") {
           return "Hayat Park 3 AVM — Bölgedeki diğer konut alanlarını gösteren harita: Hayatpark 1, Hayatpark 2, Ege Yapı Bahçeada Bahçeşehir ve Nature/Natura Bahçeşehir.";
         }
         return (
@@ -156,7 +156,7 @@
     ar: {
       filters: {
         all: "الكل",
-        "AVM-Projesi-Harita": "خريطة",
+        map: "خريطة",
         "dis-gorunus": "المنظر الخارجي",
         "ic-kisim": "الداخل",
         koridor: "الممر",
@@ -166,11 +166,11 @@
         videos: "مقاطع فيديو",
       },
       imageTitle: function (i, cat) {
-        if (cat === "AVM-Projesi-Harita") return "خريطة المشروع — تفاصيل المنطقة";
+        if (cat === "map") return "خريطة المشروع — تفاصيل المنطقة";
         return this.filters[cat] + " — صورة " + i;
       },
       imageCaption: function (i, cat) {
-        if (cat === "AVM-Projesi-Harita") {
+        if (cat === "map") {
           return "Hayat Park 3 AVM — خريطة توضح المناطق السكنية المحيطة: Hayatpark 1، Hayatpark 2، Ege Yapı Bahçeada Bahçeşehir، و Nature/Natura Bahçeşehir.";
         }
         return (
@@ -193,7 +193,7 @@
     fa: {
       filters: {
         all: "همه",
-        "AVM-Projesi-Harita": "نقشه",
+        map: "نقشه",
         "dis-gorunus": "نمای بیرونی",
         "ic-kisim": "فضای داخلی",
         koridor: "راهرو",
@@ -203,11 +203,11 @@
         videos: "ویدئوها",
       },
       imageTitle: function (i, cat) {
-        if (cat === "AVM-Projesi-Harita") return "نقشه پروژه — جزئیات منطقه";
+        if (cat === "map") return "نقشه پروژه — جزئیات منطقه";
         return this.filters[cat] + " — تصویر " + i;
       },
       imageCaption: function (i, cat) {
-        if (cat === "AVM-Projesi-Harita") {
+        if (cat === "map") {
           return "Hayat Park 3 AVM — نقشه منطقه که سایر مناطق مسکونی اطراف را نشان می‌دهد: Hayatpark 1، Hayatpark 2، Ege Yapı Bahçeada Bahçeşehir و Nature/Natura Bahçeşehir.";
         }
         return (
