@@ -241,6 +241,7 @@
           String(i).padStart(2, "0") +
           ")."
         );
+<<<<<<< HEAD
       },
     },
   };
@@ -278,6 +279,8 @@
           "پروژه‌های مشخص‌شده: Hayatpark 1 (Hp1)، Hayatpark 2 (Hp2)، Ege Yapı Bahçeada Bahçeşehir، " +
           "Nature/Natura Bahçeşehir و پارسل‌های AVM. " +
           "این تصویر مرجع اصلی مالکان برای دیدن موقعیت پروژه در میان سایر مناطق مسکونی منطقه است.",
+=======
+>>>>>>> 2721c79f43af5b6cb5c8c4ffc3ba10726ceadebb
       },
     },
   };
@@ -481,6 +484,41 @@
         '">' +
         '<div class="gallery-thumb-wrapper">' +
         '<a href="' +
+<<<<<<< HEAD
+=======
+        escapeAttr(lightboxUrl) +
+        '" class="glightbox hp3-gallery-visible" data-glightbox="' +
+        escapeAttr(dataBox) +
+        '">' +
+        '<img loading="lazy" decoding="async" src="' +
+        escapeAttr(thumbUrl) +
+        '" sizes="(max-width: 576px) 50vw,(max-width: 992px) 33vw,25vw"' +
+        ' alt="' +
+        escapeAttr(title) +
+        '" />' +
+        "</a>" +
+        "</div>" +
+        "<figcaption>" +
+        escapeAttr(caption) +
+        "</figcaption>" +
+        "</figure>"
+      );
+    }
+
+    function localVideoBlock(i, catKey, filename) {
+      var videoPath = "../videos/" + filename;
+      var title = L.videoTitle.call(L, i, catKey);
+      var caption = L.videoCaption.call(L, i, catKey);
+      var dataBox =
+        "title: " + sanitizeGlightboxText(title) + "; description: " + sanitizeGlightboxText(caption);
+
+      return (
+        '<figure class="col-6 col-md-4 col-lg-3 gallery-item hp3-gallery-item" data-category="' +
+        catKey +
+        '">' +
+        '<div class="gallery-thumb-wrapper">' +
+        '<a href="' +
+>>>>>>> 2721c79f43af5b6cb5c8c4ffc3ba10726ceadebb
         escapeAttr(videoPath) +
         '" class="glightbox hp3-gallery-visible" data-glightbox="' +
         escapeAttr(dataBox) +
